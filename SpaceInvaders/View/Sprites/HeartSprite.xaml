@@ -1,0 +1,31 @@
+﻿<local:BaseSprite
+    x:Class="SpaceInvaders.View.Sprites.HeartSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SpaceInvaders.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="28"
+    Width="50">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="HeartColor" Color="Red"/>
+
+    </UserControl.Resources>
+
+    <Canvas>
+        <Rectangle Width="15" Height="7" Canvas.Left="5" Fill="{StaticResource HeartColor}"/>
+        <Rectangle Width="15" Height="7" Canvas.Left="30" Fill="{StaticResource HeartColor}"/>
+        <Rectangle Width="50" Height="7" Canvas.Left="0" Canvas.Top="7" Fill="{StaticResource HeartColor}"/>
+        <Rectangle Width="40" Height="7" Canvas.Left="5" Canvas.Top="10" Fill="{StaticResource HeartColor}"/>
+        <Rectangle Width="35" Height="7" Canvas.Left="7.5" Canvas.Top="13" Fill="{StaticResource HeartColor}"/>
+        <Rectangle Width="20" Height="7" Canvas.Left="15" Canvas.Top="16" Fill="{StaticResource HeartColor}"/>
+        <Rectangle Width="10" Height="7" Canvas.Left="20" Canvas.Top="19" Fill="{StaticResource HeartColor}"/>
+
+
+        
+
+
+    </Canvas>
+</local:BaseSprite>

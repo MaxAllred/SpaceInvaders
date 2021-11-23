@@ -1,0 +1,19 @@
+﻿<local:BaseSprite
+    x:Class="SpaceInvaders.View.Sprites.BulletSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SpaceInvaders.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Height="20"
+    Width="5">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BulletColor" Color="White"/>
+    </UserControl.Resources>
+
+    <Canvas>
+        <Rectangle Width="5" Height="20" Fill="{StaticResource BulletColor}"/>
+    </Canvas>
+</local:BaseSprite>
