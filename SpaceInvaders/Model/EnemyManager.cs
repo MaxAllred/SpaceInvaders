@@ -76,78 +76,42 @@ namespace SpaceInvaders.Model
 
         private void createLevel1Ships()
         {
-            var enemy1 = new Enemy(1);
-            this.background.Children.Add(enemy1.Sprite);
-            this.AllEnemies.Add(enemy1);
-            var enemy2 = new Enemy(1);
-            this.background.Children.Add(enemy2.Sprite);
-            this.AllEnemies.Add(enemy2);
+            for (var i = 0; i < 2; i++)
+            {
+                var level1Enemy = new Enemy(1);
+                this.background.Children.Add(level1Enemy.Sprite);
+                this.AllEnemies.Add(level1Enemy);
+            }
         }
 
         private void createLevel2Ships()
         {
-            var enemy1Level2 = new Enemy(2);
-            this.background.Children.Add(enemy1Level2.Sprite);
-            this.AllEnemies.Add(enemy1Level2);
-            var enemy2Level2 = new Enemy(2);
-            this.background.Children.Add(enemy2Level2.Sprite);
-            this.AllEnemies.Add(enemy2Level2);
-            var enemy3Level2 = new Enemy(2);
-            this.background.Children.Add(enemy3Level2.Sprite);
-            this.AllEnemies.Add(enemy3Level2);
-            var enemy4Level2 = new Enemy(2);
-            this.background.Children.Add(enemy4Level2.Sprite);
-            this.AllEnemies.Add(enemy4Level2);
+            for (var i = 0; i < 4; i++)
+            {
+                var level2Enemy = new Enemy(2);
+                this.background.Children.Add(level2Enemy.Sprite);
+                this.AllEnemies.Add(level2Enemy);
+            }
         }
 
         private void createLevel3Ships()
         {
-            var enemy1Level3 = new Enemy(3);
-            this.background.Children.Add(enemy1Level3.Sprite);
-            this.AllEnemies.Add(enemy1Level3);
-            var enemy2Level3 = new Enemy(3);
-            this.background.Children.Add(enemy2Level3.Sprite);
-            this.AllEnemies.Add(enemy2Level3);
-            var enemy3Level3 = new Enemy(3);
-            this.background.Children.Add(enemy3Level3.Sprite);
-            this.AllEnemies.Add(enemy3Level3);
-            var enemy4Level3 = new Enemy(3);
-            this.background.Children.Add(enemy4Level3.Sprite);
-            this.AllEnemies.Add(enemy4Level3);
-            var enemy5Level3 = new Enemy(3);
-            this.background.Children.Add(enemy5Level3.Sprite);
-            this.AllEnemies.Add(enemy5Level3);
-            var enemy6Level3 = new Enemy(3);
-            this.background.Children.Add(enemy6Level3.Sprite);
-            this.AllEnemies.Add(enemy6Level3);
+            for (var i = 0; i < 6; i++)
+            {
+                var level3Enemy = new Enemy(3);
+                this.background.Children.Add(level3Enemy.Sprite);
+                this.AllEnemies.Add(level3Enemy);
+            }
         }
 
         private void createLevel4Ships()
         {
-            var enemy1Level4 = new Enemy(4);
-            this.background.Children.Add(enemy1Level4.Sprite);
-            this.AllEnemies.Add(enemy1Level4);
-            var enemy2Level4 = new Enemy(4);
-            this.background.Children.Add(enemy2Level4.Sprite);
-            this.AllEnemies.Add(enemy2Level4);
-            var enemy3Level4 = new Enemy(4);
-            this.background.Children.Add(enemy3Level4.Sprite);
-            this.AllEnemies.Add(enemy3Level4);
-            var enemy4Level4 = new Enemy(4);
-            this.background.Children.Add(enemy4Level4.Sprite);
-            this.AllEnemies.Add(enemy4Level4);
-            var enemy5Level4 = new Enemy(4);
-            this.background.Children.Add(enemy5Level4.Sprite);
-            this.AllEnemies.Add(enemy5Level4);
-            var enemy6Level4 = new Enemy(4);
-            this.background.Children.Add(enemy6Level4.Sprite);
-            this.AllEnemies.Add(enemy6Level4);
-            var enemy7Level4 = new Enemy(4);
-            this.background.Children.Add(enemy7Level4.Sprite);
-            this.AllEnemies.Add(enemy7Level4);
-            var enemy8Level4 = new Enemy(4);
-            this.background.Children.Add(enemy8Level4.Sprite);
-            this.AllEnemies.Add(enemy8Level4);
+            for (var i = 0; i < 8; i++)
+            {
+                var level4Enemy = new Enemy(4);
+                this.background.Children.Add(level4Enemy.Sprite);
+                this.AllEnemies.Add(level4Enemy);
+            }
         }
 
         private void placeAllShips()
