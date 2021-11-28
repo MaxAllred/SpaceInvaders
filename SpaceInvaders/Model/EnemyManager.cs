@@ -12,6 +12,12 @@ namespace SpaceInvaders.Model
         private const double Level2ShipBottomOffset = 240;
         private const double Level3ShipBottomOffset = 340;
         private const double Level4ShipBottomOffset = 440;
+
+        private const int Level1Ships = 2;
+        private const int Level2Ships = 4;
+        private const int Level3Ships = 6;
+        private const int Level4Ships = 8;
+
         public readonly Collection<GameObject> AllEnemies;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
@@ -76,9 +82,9 @@ namespace SpaceInvaders.Model
 
         private void createLevel1Ships()
         {
-            for (var i = 0; i < 2; i++)
+            for (var i = 0; i < Level1Ships; i++)
             {
-                var level1Enemy = new Enemy(1);
+                var level1Enemy = new Enemy(EnemyShipVersion.LevelOne);
                 this.background.Children.Add(level1Enemy.Sprite);
                 this.AllEnemies.Add(level1Enemy);
             }
@@ -86,9 +92,9 @@ namespace SpaceInvaders.Model
 
         private void createLevel2Ships()
         {
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < Level2Ships; i++)
             {
-                var level2Enemy = new Enemy(2);
+                var level2Enemy = new Enemy(EnemyShipVersion.LevelTwo);
                 this.background.Children.Add(level2Enemy.Sprite);
                 this.AllEnemies.Add(level2Enemy);
             }
@@ -96,9 +102,9 @@ namespace SpaceInvaders.Model
 
         private void createLevel3Ships()
         {
-            for (var i = 0; i < 6; i++)
+            for (var i = 0; i < Level3Ships; i++)
             {
-                var level3Enemy = new Enemy(3);
+                var level3Enemy = new Enemy(EnemyShipVersion.LevelThree);
                 this.background.Children.Add(level3Enemy.Sprite);
                 this.AllEnemies.Add(level3Enemy);
             }
@@ -106,9 +112,9 @@ namespace SpaceInvaders.Model
 
         private void createLevel4Ships()
         {
-            for (var i = 0; i < 8; i++)
+            for (var i = 0; i < Level4Ships; i++)
             {
-                var level4Enemy = new Enemy(4);
+                var level4Enemy = new Enemy(EnemyShipVersion.LevelFour);
                 this.background.Children.Add(level4Enemy.Sprite);
                 this.AllEnemies.Add(level4Enemy);
             }
