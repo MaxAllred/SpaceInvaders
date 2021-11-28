@@ -20,19 +20,19 @@ namespace SpaceInvaders.Model
         /// <summary>
         ///     Initializes a new instance of the <see cref="Enemy" /> class.
         /// </summary>
-        public Enemy(int enemyLevel)
+        public Enemy(EnemyShipVersion enemyVersion)
         {
-            if (enemyLevel == 1)
+            if (enemyVersion == EnemyShipVersion.LevelOne)
             {
                 Sprite = new Level1EnemySprite();
-            }else if (enemyLevel == 2)
+            }else if (enemyVersion == EnemyShipVersion.LevelTwo)
             {
                 Sprite = new Level2EnemySprite();
-            } else if (enemyLevel == 3)
+            } else if (enemyVersion == EnemyShipVersion.LevelThree)
             {
                 Sprite = new Level3EnemySprite();
             }
-            else if (enemyLevel == 4)
+            else if (enemyVersion == EnemyShipVersion.LevelFour)
             {
                 Sprite = new Level4EnemySprite();
                 
