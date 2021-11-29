@@ -185,8 +185,8 @@ namespace SpaceInvaders.Model
             var countOfFiringEnemies = 0;
             foreach (var current in this.AllEnemies)
             {
-                if (current.Sprite.ToString().Equals("SpaceInvaders.View.Sprites.Level3EnemySprite") ||
-                    current.Sprite.ToString().Equals("SpaceInvaders.View.Sprites.Level4EnemySprite"))
+                if (current.EnemyVersion.Equals(EnemyShipVersion.LevelThree) ||
+                    current.EnemyVersion.Equals(EnemyShipVersion.LevelFour))
                 {
                     countOfFiringEnemies++;
                 }
