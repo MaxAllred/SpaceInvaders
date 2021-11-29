@@ -20,6 +20,14 @@ namespace SpaceInvaders.Model
         public bool CanShoot { get; protected set; }
         public int PointValue { get; protected set; }
 
+        /// <summary>
+        ///     Gets or sets the enemy ship version.
+        /// </summary>
+        /// <value>
+        ///     The enemy version.
+        /// </value>
+        public EnemyShipVersion EnemyVersion { get; protected set; }
+
         #endregion
 
         #region Constructors
@@ -34,7 +42,7 @@ namespace SpaceInvaders.Model
                 Sprite = new Level1EnemySprite();
                 PointValue = Level1EnemyPoints;
                 CanShoot = false;
-            }else if (enemyVersion == EnemyShipVersion.LevelTwo)
+            } else if (enemyVersion == EnemyShipVersion.LevelTwo)
             {
                 Sprite = new Level2EnemySprite();
                 PointValue = Level2EnemyPoints;
@@ -44,14 +52,14 @@ namespace SpaceInvaders.Model
                 Sprite = new Level3EnemySprite();
                 PointValue = Level3EnemyPoints;
                 CanShoot = true;
-            }
-            else if (enemyVersion == EnemyShipVersion.LevelFour)
+            } else if (enemyVersion == EnemyShipVersion.LevelFour)
             {
                 Sprite = new Level4EnemySprite();
                 PointValue = Level4EnemyPoints;
                 CanShoot = true;
             }
-            
+
+            this.EnemyVersion = enemyVersion;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
