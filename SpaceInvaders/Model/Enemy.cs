@@ -16,6 +16,8 @@ namespace SpaceInvaders.Model
         private const int Level2EnemyPoints = 2;
         private const int Level3EnemyPoints = 3;
         private const int Level4EnemyPoints = 4;
+
+        public bool CanShoot { get; protected set; }
         public int PointValue { get; protected set; }
 
         #endregion
@@ -31,20 +33,23 @@ namespace SpaceInvaders.Model
             {
                 Sprite = new Level1EnemySprite();
                 PointValue = Level1EnemyPoints;
+                CanShoot = false;
             }else if (enemyVersion == EnemyShipVersion.LevelTwo)
             {
                 Sprite = new Level2EnemySprite();
                 PointValue = Level2EnemyPoints;
+                CanShoot = false;
             } else if (enemyVersion == EnemyShipVersion.LevelThree)
             {
                 Sprite = new Level3EnemySprite();
                 PointValue = Level3EnemyPoints;
+                CanShoot = true;
             }
             else if (enemyVersion == EnemyShipVersion.LevelFour)
             {
                 Sprite = new Level4EnemySprite();
                 PointValue = Level4EnemyPoints;
-
+                CanShoot = true;
             }
             
             SetSpeed(SpeedXDirection, SpeedYDirection);
