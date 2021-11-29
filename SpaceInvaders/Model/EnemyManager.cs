@@ -18,7 +18,7 @@ namespace SpaceInvaders.Model
         private const int Level3Ships = 6;
         private const int Level4Ships = 8;
 
-        public readonly Collection<GameObject> AllEnemies;
+        public readonly Collection<Enemy> AllEnemies;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
         private readonly double backgroundHeight;
@@ -34,7 +34,7 @@ namespace SpaceInvaders.Model
         public EnemyManager(Canvas background)
         {
             this.background = background;
-            this.AllEnemies = new Collection<GameObject>();
+            this.AllEnemies = new Collection<Enemy>();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
         }

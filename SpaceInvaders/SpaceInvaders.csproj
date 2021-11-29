@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\EnemyManager.cs" />
+    <Compile Include="Model\EnemyShipVersion.cs" />
     <Compile Include="Model\GameOverText.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\GameManager.cs" />

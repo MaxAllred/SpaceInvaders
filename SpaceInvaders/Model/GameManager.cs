@@ -199,6 +199,7 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>Checks for collisions.</summary>
         public void CheckForCollisions()
         {
             this.checkForPlayerBulletCollision();
@@ -208,36 +209,17 @@ namespace SpaceInvaders.Model
 
         private void checkForPlayerBulletCollision()
         {
-            for (var i = 0; i < this.EnemyManager.AllEnemies.Count; i++)
+            for (var bulletIndex = 0; bulletIndex < this.playerBullets.Count; bulletIndex++)
             {
-                for (var j = 0; j < this.activeBullets - 1; j++)
+                Bullet bullet = this.playerBullets[bulletIndex];
+                for (var enemyShipIndex = 0; enemyShipIndex < this.EnemyManager.AllEnemies.Count; enemyShipIndex++)
                 {
-                    var current = this.EnemyManager.AllEnemies[i];
-                    if (this.playerBullets[j].X >= current.X && this.playerBullets[j].X <= current.X + current.Width)
+                    Enemy currentEnemy = this.EnemyManager.AllEnemies[enemyShipIndex];
+                    if (bullet.CheckForCollision(currentEnemy))
                     {
-                        if (this.playerBullets[j].Y >= current.Y &&
-                            this.playerBullets[j].Y + HitBoxBuffer <= current.Y + current.Height)
-                        {
-                            this.EnemyManager.AllEnemies.Remove(current);
-                            if (current.Sprite.ToString().Equals("SpaceInvaders.View.Sprites.Level1EnemySprite"))
-                            {
-                                this.Score += 1;
-                            }
-                            else if (current.Sprite.ToString().Equals("SpaceInvaders.View.Sprites.Level2EnemySprite"))
-                            {
-                                this.Score += 2;
-                            }
-                            else if (current.Sprite.ToString().Equals("SpaceInvaders.View.Sprites.Level3EnemySprite"))
-                            {
-                                this.Score += 3;
-                            }
-                            else if (current.Sprite.ToString().Equals("SpaceInvaders.View.Sprites.Level4EnemySprite"))
-                            {
-                                this.Score += 4;
-                            }
-
-                            this.registerHit(current.Sprite, j);
-                        }
+                        this.Score += currentEnemy.PointValue;
+                        this.EnemyManager.AllEnemies.Remove(currentEnemy);
+                        this.registerHit(currentEnemy.Sprite, bulletIndex);
                     }
                 }
             }

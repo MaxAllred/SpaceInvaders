@@ -1,4 +1,6 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using System;
+using Windows.Foundation;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -24,6 +26,20 @@ namespace SpaceInvaders.Model
         {
             Sprite = new BulletSprite();
             SetSpeed(SpeedXDirection, SpeedYDirection);
+        }
+
+        public bool CheckForCollision(GameObject ship)
+        {
+            if (ship == null) throw new ArgumentNullException(nameof(ship));
+
+            var bulletBoundary = new Rect(X, Y, Width, Height);
+            var shipBoundary = new Rect(ship.X, ship.Y, ship.Width, ship.Height);
+
+            var intersect = bulletBoundary;
+            intersect.Intersect(shipBoundary);
+
+            if (intersect.IsEmpty) return false;
+            else return true;
         }
 
         #endregion
