@@ -18,8 +18,8 @@ namespace SpaceInvaders.Model
         private const int Level3Ships = 6;
         private const int Level4Ships = 8;
 
-        private const int minSteps = -2;
-        private const int maxSteps = 18;
+        private const int MinSteps = -2;
+        private const int MaxSteps = 18;
 
         public readonly Collection<Enemy> AllEnemies;
         public Bullet EnemyBullet;
@@ -40,7 +40,7 @@ namespace SpaceInvaders.Model
             this.AllEnemies = new Collection<Enemy>();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
-            this.countSteps = maxSteps / 2;
+            this.countSteps = MaxSteps / 2;
         }
 
         #endregion
@@ -67,7 +67,7 @@ namespace SpaceInvaders.Model
                 this.countSteps--;
             }
 
-            if (countSteps == maxSteps || countSteps == minSteps)
+            if (countSteps == MaxSteps || countSteps == MinSteps)
             {
                 MoveRight = !MoveRight;
             }
