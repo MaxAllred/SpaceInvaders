@@ -66,7 +66,8 @@ namespace SpaceInvaders.Model
 
         #region Methods
 
-        public void MoveEnemyShips()
+        /// <summary>Moves enemy ships and all active bullets</summary>
+        public void MoveElements()
         {
             foreach (var bullet in this.playerBullets)
             {
@@ -81,14 +82,7 @@ namespace SpaceInvaders.Model
                 this.EnemyManager.EnemyBullet.MoveDown();
             }
 
-            if (this.EnemyManager.MoveRight)
-            {
-                this.EnemyManager.MoveAllEnemiesRight();
-            }
-            else
-            {
-                this.EnemyManager.MoveAllEnemiesLeft();
-            }
+            this.EnemyManager.MoveAllEnemies();
         }
 
         /// <summary>

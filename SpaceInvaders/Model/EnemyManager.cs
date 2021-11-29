@@ -18,6 +18,9 @@ namespace SpaceInvaders.Model
         private const int Level3Ships = 6;
         private const int Level4Ships = 8;
 
+        private const int minSteps = -2;
+        private const int maxSteps = 18;
+
         public readonly Collection<Enemy> AllEnemies;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
@@ -37,37 +40,36 @@ namespace SpaceInvaders.Model
             this.AllEnemies = new Collection<Enemy>();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
+            this.countSteps = maxSteps / 2;
         }
 
         #endregion
 
         #region Methods
 
-        public void MoveAllEnemiesLeft()
+        /// <summary>Moves all enemies.</summary>
+        public void MoveAllEnemies()
         {
-            foreach (var currentEnemy in this.AllEnemies)
+            if (MoveRight)
             {
-                currentEnemy.MoveLeft();
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    currentEnemy.MoveRight();
+                }
+                this.countSteps++;
+            }
+            else
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    currentEnemy.MoveLeft();
+                }
+                this.countSteps--;
             }
 
-            this.countSteps--;
-            if (this.countSteps == -10)
+            if (countSteps == maxSteps || countSteps == minSteps)
             {
-                this.MoveRight = true;
-            }
-        }
-
-        public void MoveAllEnemiesRight()
-        {
-            foreach (var currentEnemy in this.AllEnemies)
-            {
-                currentEnemy.MoveRight();
-            }
-
-            this.countSteps++;
-            if (this.countSteps == 10)
-            {
-                this.MoveRight = false;
+                MoveRight = !MoveRight;
             }
         }
 

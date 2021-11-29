@@ -97,7 +97,7 @@ namespace SpaceInvaders.View
             }
             else
             {
-                this.gameManager.MoveEnemyShips();
+                this.gameManager.MoveElements();
 
                 this.gameManager.CheckForCollisions();
             }
