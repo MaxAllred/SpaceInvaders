@@ -28,6 +28,12 @@ namespace SpaceInvaders.Model
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
+        /// <summary>Checks for collision between this bullet and a ship.</summary>
+        /// <param name="ship">The ship.</param>
+        /// <returns>
+        ///   True if the bullet intersects the ship, false otherwise
+        /// </returns>
+        /// <exception cref="ArgumentNullException">ship</exception>
         public bool CheckForCollision(GameObject ship)
         {
             if (ship == null) throw new ArgumentNullException(nameof(ship));
