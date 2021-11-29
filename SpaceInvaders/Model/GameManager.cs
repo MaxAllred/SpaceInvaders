@@ -242,15 +242,9 @@ namespace SpaceInvaders.Model
 
         private void checkForEnemyCollision()
         {
-            const int buffer = 10;
-            if (this.EnemyManager.EnemyBullet.X >= this.playerShip.X &&
-                this.EnemyManager.EnemyBullet.X <= this.playerShip.X + this.playerShip.Width)
+            if (this.EnemyManager.EnemyBullet.CheckForCollision(this.playerShip))
             {
-                if (this.EnemyManager.EnemyBullet.Y >= this.playerShip.Y && this.EnemyManager.EnemyBullet.Y + buffer <=
-                    this.playerShip.Y + this.playerShip.Height)
-                {
-                    this.registerHitFromEnemy();
-                }
+                this.registerHitFromEnemy();
             }
         }
 
