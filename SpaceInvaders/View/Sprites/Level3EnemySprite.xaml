@@ -16,12 +16,8 @@
     </UserControl.Resources>
 
     <Canvas>
-        <Ellipse Width="5" Height="20"  Canvas.Top="8" Canvas.Left="10" Fill="{StaticResource PointColor}"/>
-        <Ellipse Width="5" Height="20"  Canvas.Top="8" Canvas.Left="35" Fill="{StaticResource PointColor}"/>
         <Rectangle Width="5" Height="20"  Canvas.Top="8" Canvas.Left="0" Fill="{StaticResource HarderEnemyColor}"/>
-        <Ellipse Name="pointer" Width="10" Height="5" Canvas.Top="23" Canvas.Left="20" Fill="{StaticResource PointColor}"/>
         <Rectangle Width="10" Height="5" Canvas.Top="18" Canvas.Left="20" Fill="{StaticResource HarderEnemyColor}"/>
-
         <Rectangle Width="30" Height="5" Canvas.Top="13" Canvas.Left="10" Fill="{StaticResource HarderEnemyColor}"/>
         <Rectangle Width="5" Height="5" Canvas.Top="10.5" Canvas.Left="22.5" Fill="{StaticResource WarningColor}" RadiusX="0" RadiusY="0" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>

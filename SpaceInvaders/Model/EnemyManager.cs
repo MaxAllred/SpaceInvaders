@@ -54,6 +54,7 @@ namespace SpaceInvaders.Model
             {
                 foreach (var currentEnemy in this.AllEnemies)
                 {
+                    currentEnemy.Animate();
                     currentEnemy.MoveRight();
                 }
                 this.countSteps++;
@@ -62,6 +63,7 @@ namespace SpaceInvaders.Model
             {
                 foreach (var currentEnemy in this.AllEnemies)
                 {
+                    currentEnemy.Animate();
                     currentEnemy.MoveLeft();
                 }
                 this.countSteps--;
@@ -87,7 +89,8 @@ namespace SpaceInvaders.Model
             for (var i = 0; i < Level1Ships; i++)
             {
                 var level1Enemy = new Enemy(EnemyShipVersion.LevelOne);
-                this.background.Children.Add(level1Enemy.Sprite);
+                this.background.Children.Add(level1Enemy.Sprite1);
+                this.background.Children.Add(level1Enemy.Sprite2);
                 this.AllEnemies.Add(level1Enemy);
             }
         }
@@ -97,7 +100,8 @@ namespace SpaceInvaders.Model
             for (var i = 0; i < Level2Ships; i++)
             {
                 var level2Enemy = new Enemy(EnemyShipVersion.LevelTwo);
-                this.background.Children.Add(level2Enemy.Sprite);
+                this.background.Children.Add(level2Enemy.Sprite1);
+                this.background.Children.Add(level2Enemy.Sprite2);
                 this.AllEnemies.Add(level2Enemy);
             }
         }
@@ -107,7 +111,8 @@ namespace SpaceInvaders.Model
             for (var i = 0; i < Level3Ships; i++)
             {
                 var level3Enemy = new Enemy(EnemyShipVersion.LevelThree);
-                this.background.Children.Add(level3Enemy.Sprite);
+                this.background.Children.Add(level3Enemy.Sprite1);
+                this.background.Children.Add(level3Enemy.Sprite2);
                 this.AllEnemies.Add(level3Enemy);
             }
         }
@@ -117,7 +122,8 @@ namespace SpaceInvaders.Model
             for (var i = 0; i < Level4Ships; i++)
             {
                 var level4Enemy = new Enemy(EnemyShipVersion.LevelFour);
-                this.background.Children.Add(level4Enemy.Sprite);
+                this.background.Children.Add(level4Enemy.Sprite1);
+                this.background.Children.Add(level4Enemy.Sprite2);
                 this.AllEnemies.Add(level4Enemy);
             }
         }
@@ -185,8 +191,7 @@ namespace SpaceInvaders.Model
             var countOfFiringEnemies = 0;
             foreach (var current in this.AllEnemies)
             {
-                if (current.EnemyVersion.Equals(EnemyShipVersion.LevelThree) ||
-                    current.EnemyVersion.Equals(EnemyShipVersion.LevelFour))
+                if (current.CanShoot)
                 {
                     countOfFiringEnemies++;
                 }

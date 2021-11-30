@@ -21,6 +21,7 @@ namespace SpaceInvaders.Model
         private static readonly int bulletCount = 3;
         public int Score;
         public bool GameOver;
+        public event EventHandler ScoreChanged;
 
         public EnemyManager EnemyManager;
         private int activeBullets;
@@ -217,6 +218,12 @@ namespace SpaceInvaders.Model
                     }
                 }
             }
+        }
+
+        protected virtual void OnScoreChanged(EventArgs e)
+        {
+            EventHandler handler = ScoreChanged;
+            handler?.Invoke(this, e);
         }
 
         private void registerHit(BaseSprite currentSprite, int bulletNumber)

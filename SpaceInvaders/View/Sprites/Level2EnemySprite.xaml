@@ -11,13 +11,11 @@
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="HarderEnemyColor" Color="Blue"/>
-        <SolidColorBrush x:Key="HarderPointColor" Color="Green"/>
     </UserControl.Resources>
 
     <Canvas>
         <Rectangle Width="5" Height="20"  Canvas.Top="8" Canvas.Left="10" Fill="{StaticResource HarderEnemyColor}"/>
         <Rectangle Width="5" Height="20"  Canvas.Top="8" Canvas.Left="0" Fill="{StaticResource HarderEnemyColor}"/>
-        <Ellipse Width="10" Height="5" Canvas.Top="23" Canvas.Left="20"  Fill="{StaticResource HarderPointColor}"/>
         <Rectangle Width="10" Height="5" Canvas.Top="18" Canvas.Left="20" Fill="{StaticResource HarderEnemyColor}"/>
         <Rectangle Width="20" Height="5" Canvas.Top="13" Canvas.Left="15" Fill="{StaticResource HarderEnemyColor}"/>
         <Rectangle Width="30" Height="5"  Canvas.Top="8" Canvas.Left="10" Fill="{StaticResource HarderEnemyColor}"/>
