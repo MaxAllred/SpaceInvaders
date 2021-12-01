@@ -209,7 +209,7 @@ namespace SpaceInvaders.Model
                 Bullet bullet = this.playerBullets[bulletIndex];
                 for (var enemyShipIndex = 0; enemyShipIndex < this.EnemyManager.AllEnemies.Count; enemyShipIndex++)
                 {
-                    Enemy currentEnemy = this.EnemyManager.AllEnemies[enemyShipIndex];
+                    EnemyShip currentEnemy = this.EnemyManager.AllEnemies[enemyShipIndex];
                     if (bullet.CheckForCollision(currentEnemy))
                     {
                         this.Score += currentEnemy.PointValue;

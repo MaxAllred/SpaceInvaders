@@ -8,27 +8,25 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        private const double Level1ShipBottomOffset = 140;
-        private const double Level2ShipBottomOffset = 240;
-        private const double Level3ShipBottomOffset = 340;
-        private const double Level4ShipBottomOffset = 440;
+        private readonly double backgroundHeight;
+        private readonly double backgroundWidth;
+        private readonly Canvas background;
 
-        private const int Level1Ships = 2;
-        private const int Level2Ships = 4;
-        private const int Level3Ships = 6;
-        private const int Level4Ships = 8;
+        private const int Level1ShipCount = 2;
+        private const int Level2ShipCount = 4;
+        private const int Level3ShipCount = 6;
+        private const int Level4ShipCount = 8;
+        private const int verticalSpaceBetweenRows = 20;
 
         private const int MinSteps = -2;
         private const int MaxSteps = 18;
 
-        public readonly Collection<Enemy> AllEnemies;
+        public readonly Collection<EnemyShip> AllEnemies;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
-        private readonly double backgroundHeight;
-        private readonly double backgroundWidth;
-        private readonly Canvas background;
+        
         private int countSteps;
-        private readonly int spacingIncrement = 15;
+        
 
         #endregion
 
@@ -37,7 +35,7 @@ namespace SpaceInvaders.Model
         public EnemyManager(Canvas background)
         {
             this.background = background;
-            this.AllEnemies = new Collection<Enemy>();
+            this.AllEnemies = new Collection<EnemyShip>();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
             this.countSteps = MaxSteps / 2;
@@ -50,7 +48,7 @@ namespace SpaceInvaders.Model
         /// <summary>Moves all enemies.</summary>
         public void MoveAllEnemies()
         {
-            if (MoveRight)
+            if (this.MoveRight)
             {
                 foreach (var currentEnemy in this.AllEnemies)
                 {
@@ -69,119 +67,92 @@ namespace SpaceInvaders.Model
                 this.countSteps--;
             }
 
-            if (countSteps == MaxSteps || countSteps == MinSteps)
+            if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
             {
-                MoveRight = !MoveRight;
+                this.MoveRight = !this.MoveRight;
             }
         }
 
         public void CreateAndPlaceAllEnemyShips()
         {
-            this.createLevel1Ships();
-            this.createLevel2Ships();
-            this.createLevel3Ships();
-            this.createLevel4Ships();
-            this.placeAllShips();
+            this.createAllEnemyShips();
+            this.positionEnemies();
         }
 
-        private void createLevel1Ships()
+        private void createAllEnemyShips()
         {
-            for (var i = 0; i < Level1Ships; i++)
+            EnemyFactory factory = new Level4EnemyFactory();
+            for (int i = 0; i < Level4ShipCount; i++)
             {
-                var level1Enemy = new Enemy(EnemyShipVersion.LevelOne);
-                this.background.Children.Add(level1Enemy.Sprite1);
-                this.background.Children.Add(level1Enemy.Sprite2);
-                this.AllEnemies.Add(level1Enemy);
+                this.createEnemyShip(factory);
+            }
+
+            factory = new Level3EnemyFactory();
+            for (int i = 0; i < Level3ShipCount; i++)
+            {
+                this.createEnemyShip(factory);
+            }
+
+            factory = new Level2EnemyFactory();
+            for (int i = 0; i < Level2ShipCount; i++)
+            {
+                this.createEnemyShip(factory);
+            }
+
+            factory = new Level1EnemyFactory();
+            for (int i = 0; i < Level1ShipCount; i++)
+            {
+                this.createEnemyShip(factory);
             }
         }
 
-        private void createLevel2Ships()
+        private void createEnemyShip(EnemyFactory theFactory)
         {
-            for (var i = 0; i < Level2Ships; i++)
-            {
-                var level2Enemy = new Enemy(EnemyShipVersion.LevelTwo);
-                this.background.Children.Add(level2Enemy.Sprite1);
-                this.background.Children.Add(level2Enemy.Sprite2);
-                this.AllEnemies.Add(level2Enemy);
-            }
+            EnemyShip newShip = theFactory.GetEnemyShip();
+            this.background.Children.Add(newShip.Sprite1);
+            this.background.Children.Add(newShip.Sprite2);
+            this.AllEnemies.Add(newShip);
         }
 
-        private void createLevel3Ships()
+        private void positionEnemies()
         {
-            for (var i = 0; i < Level3Ships; i++)
-            {
-                var level3Enemy = new Enemy(EnemyShipVersion.LevelThree);
-                this.background.Children.Add(level3Enemy.Sprite1);
-                this.background.Children.Add(level3Enemy.Sprite2);
-                this.AllEnemies.Add(level3Enemy);
-            }
-        }
+            var shipWidth = this.AllEnemies[0].Width;
+            var shipGap = shipWidth / 3;
 
-        private void createLevel4Ships()
-        {
-            for (var i = 0; i < Level4Ships; i++)
+            for (var shipIndex = 0; shipIndex < this.AllEnemies.Count; shipIndex++)
             {
-                var level4Enemy = new Enemy(EnemyShipVersion.LevelFour);
-                this.background.Children.Add(level4Enemy.Sprite1);
-                this.background.Children.Add(level4Enemy.Sprite2);
-                this.AllEnemies.Add(level4Enemy);
-            }
-        }
+                int rowNumberFromTop;
+                int shipsPerRow;
+                int shipNumberInRow = shipIndex;
 
-        private void placeAllShips()
-        {
-            var xPlacement = this.spacingIncrement;
-            var placeRight = true;
-            var counter = 0;
-            var midpoint = this.backgroundWidth / 2;
-            foreach (var currentShip in this.AllEnemies)
-            {
-                if (counter == 2 || counter == 6 || counter == 12 || counter == 20)
+                if (shipIndex < Level4ShipCount)
                 {
-                    xPlacement = this.spacingIncrement;
+                    rowNumberFromTop = 1;
+                    shipsPerRow = Level4ShipCount;
+                }
+                else if (shipIndex < Level4ShipCount + Level3ShipCount)
+                {
+                    rowNumberFromTop = 2;
+                    shipsPerRow = Level3ShipCount;
+                    shipNumberInRow -= Level4ShipCount;
+                } 
+                else if (shipIndex < Level4ShipCount + Level3ShipCount + Level2ShipCount)
+                {
+                    rowNumberFromTop = 3;
+                    shipsPerRow = Level2ShipCount;
+                    shipNumberInRow -= Level4ShipCount + Level3ShipCount;
+                }
+                else
+                {
+                    rowNumberFromTop = 4;
+                    shipsPerRow = Level1ShipCount;
+                    shipNumberInRow -= Level4ShipCount + Level3ShipCount + Level2ShipCount;
                 }
 
-                if (counter < 2)
-                {
-                    this.placeShitToLeftOrRight(placeRight, currentShip, xPlacement, midpoint);
-                    currentShip.Y = this.backgroundHeight - Level1ShipBottomOffset;
-                    xPlacement += (int) currentShip.Width - this.spacingIncrement;
-                }
-                else if (counter < 6)
-                {
-                    this.placeShitToLeftOrRight(placeRight, currentShip, xPlacement, midpoint);
-                    currentShip.Y = this.backgroundHeight - Level2ShipBottomOffset;
-                    xPlacement += (int) currentShip.Width - this.spacingIncrement;
-                }
-                else if (counter < 12)
-                {
-                    this.placeShitToLeftOrRight(placeRight, currentShip, xPlacement, midpoint);
-
-                    currentShip.Y = this.backgroundHeight - Level3ShipBottomOffset;
-                    xPlacement += (int) currentShip.Width - this.spacingIncrement;
-                }
-                else if (counter < 20)
-                {
-                    this.placeShitToLeftOrRight(placeRight, currentShip, xPlacement, midpoint);
-
-                    currentShip.Y = this.backgroundHeight - Level4ShipBottomOffset;
-                    xPlacement += (int) currentShip.Width - this.spacingIncrement;
-                }
-
-                counter++;
-                placeRight = !placeRight;
-            }
-        }
-
-        private void placeShitToLeftOrRight(bool placeRight, GameObject currentShip, int xPlacement, double midpoint)
-        {
-            if (placeRight)
-            {
-                currentShip.X = xPlacement + midpoint;
-            }
-            else
-            {
-                currentShip.X = midpoint - xPlacement;
+                double distanceFromLeft =
+                    (this.backgroundWidth - shipsPerRow * shipWidth - (shipsPerRow - 1) * shipGap) / 2;
+                this.AllEnemies[shipIndex].Y = (this.AllEnemies[shipIndex].Height + verticalSpaceBetweenRows) * rowNumberFromTop;
+                this.AllEnemies[shipIndex].X = distanceFromLeft + (shipGap + shipWidth) * shipNumberInRow;
             }
         }
 

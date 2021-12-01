@@ -119,14 +119,23 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\EnemyFactory.cs" />
     <Compile Include="Model\EnemyManager.cs" />
+    <Compile Include="Model\EnemyShip.cs" />
+    <Compile Include="Model\Level1Enemy.cs" />
     <Compile Include="Model\EnemyShipVersion.cs" />
     <Compile Include="Model\GameOverText.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\GameObject.cs" />
-    <Compile Include="Model\Enemy.cs" />
     <Compile Include="Model\Heart.cs" />
+    <Compile Include="Model\Level1EnemyFactory.cs" />
+    <Compile Include="Model\Level2Enemy.cs" />
+    <Compile Include="Model\Level2EnemyFactory.cs" />
+    <Compile Include="Model\Level3Enemy.cs" />
+    <Compile Include="Model\Level3EnemyFactory.cs" />
+    <Compile Include="Model\Level4Enemy.cs" />
+    <Compile Include="Model\Level4EnemyFactory.cs" />
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
