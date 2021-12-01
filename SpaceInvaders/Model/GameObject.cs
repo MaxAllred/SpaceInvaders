@@ -11,8 +11,10 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        private const int WidthOfScreen = 640;
+        private const int WidthOfScreen = 960;
 
+        public static int VerticalScreenOffset = 20;
+        public static int HorizontalScreenOffset = 160;
         private Point location;
 
         #endregion
@@ -102,7 +104,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveRight()
         {
-            if (this.location.X > WidthOfScreen - this.Width)
+            if (this.location.X > WidthOfScreen - HorizontalScreenOffset - this.Width)
             {
                 return;
             }
@@ -117,7 +119,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveLeft()
         {
-            if (this.location.X < 0)
+            if (this.location.X < - HorizontalScreenOffset)
             {
                 return;
             }

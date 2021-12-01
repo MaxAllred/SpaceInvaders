@@ -232,7 +232,7 @@ namespace SpaceInvaders.Model
         {
             this.background.Children.Remove(currentSprite);
 
-            this.playerBullets[bulletNumber].Y = 0 - this.playerBullets[bulletNumber].Height;
+            this.playerBullets[bulletNumber].Y = 0 - GameObject.VerticalScreenOffset - this.playerBullets[bulletNumber].Height;
 
             this.background.Children.Remove(this.scoreTextBlock);
             this.scoreTextBlock = new TextBlock
@@ -285,9 +285,9 @@ namespace SpaceInvaders.Model
             }
 
             this.background.Children.Add(gameOverText.Sprite);
-            gameOverText.X = this.backgroundWidth / 2 - gameOverText.Width / 2;
+            gameOverText.X = this.backgroundWidth / 2 - gameOverText.Width / 2 - GameObject.HorizontalScreenOffset;
 
-            gameOverText.Y = TextBottomOffset;
+            gameOverText.Y = TextBottomOffset - GameObject.VerticalScreenOffset;
         }
 
         #endregion

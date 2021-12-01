@@ -18,8 +18,8 @@ namespace SpaceInvaders.Model
         private const int Level4ShipCount = 8;
         private const int verticalSpaceBetweenRows = 20;
 
-        private const int MinSteps = -2;
-        private const int MaxSteps = 18;
+        private const int MinSteps = -5;
+        private const int MaxSteps = 28;
 
         public readonly Collection<EnemyShip> AllEnemies;
         public Bullet EnemyBullet;

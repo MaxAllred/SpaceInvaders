@@ -25,7 +25,7 @@ namespace SpaceInvaders.View
         /// <summary>
         ///     The application width
         /// </summary>
-        public const double ApplicationWidth = 640;
+        public const double ApplicationWidth = 960;
 
         private int fireRate;
 
