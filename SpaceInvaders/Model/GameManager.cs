@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
@@ -236,8 +238,9 @@ namespace SpaceInvaders.Model
             this.scoreTextBlock = new TextBlock
             {
                 Text = "Score: " + this.Score,
-                HorizontalTextAlignment = TextAlignment.Center
-            };
+                HorizontalTextAlignment = TextAlignment.Center,
+               Foreground = new SolidColorBrush(Windows.UI.Colors.White)
+        };
             this.background.Children.Add(this.scoreTextBlock);
         }
 
