@@ -159,7 +159,11 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MovePlayerShipLeft()
         {
-            this.playerShip.MoveLeft();
+            if (this.playerShip.X - this.playerShip.SpeedX > 0)
+            {
+                this.playerShip.MoveLeft();
+            }
+            
         }
 
         /// <summary>
