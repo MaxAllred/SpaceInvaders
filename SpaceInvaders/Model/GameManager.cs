@@ -292,6 +292,7 @@ namespace SpaceInvaders.Model
             
             if (this.EnemyManager.AllEnemies.Count == 0 && this.level >= 3)
             {
+                sound.youWin();
                 this.allEliminated = true;
                 this.GameOver = true;
             }
