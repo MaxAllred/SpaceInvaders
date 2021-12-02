@@ -226,6 +226,30 @@ namespace SpaceInvaders.Model
             }
         }
 
+        public void FireBonusEnemyBullet()
+        {
+            if (CeaseFire)
+            {
+                return;
+            }
+            var rand = new Random();
+
+            if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
+            {
+                this.background.Children.Add(this.EnemyBullet.Sprite);
+                this.EnemyBullet.Y = this.backgroundHeight + this.EnemyBullet.Height;
+                //sound.enemyShot();
+            }
+
+            if (this.EnemyBullet.Y >= this.backgroundHeight)
+            {
+                this.EnemyBullet.X = this.bonusShip.X + this.bonusShip.Width / 2 - this.EnemyBullet.Width / 2;
+                this.EnemyBullet.Y = this.bonusShip.Y;
+                //sound.enemyShot();
+
+            }
+        }
+
         public void GenerateNewLevel(int level)
         {
             if(level == 2)
