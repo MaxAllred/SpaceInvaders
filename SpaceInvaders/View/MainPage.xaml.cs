@@ -143,6 +143,7 @@ namespace SpaceInvaders.View
 
                 this.gameManager.CheckForCollisions();
             }
+            this.gameManager.EnemyManager.FireBonusEnemyBullet();
         }
 
         #endregion
