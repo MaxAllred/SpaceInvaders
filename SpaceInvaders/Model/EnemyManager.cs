@@ -17,6 +17,7 @@ namespace SpaceInvaders.Model
         private int Level3ShipCount = 6;
         private int Level4ShipCount = 8;
         private const int verticalSpaceBetweenRows = 20;
+        private const int bottomBorderForMovement = 120;
 
         private const int MinSteps = -5;
         private const int MaxSteps = 28;
@@ -70,6 +71,10 @@ namespace SpaceInvaders.Model
                     if (StepCloser == true)
                     {
                         currentEnemy.MoveDown();
+                        if (currentEnemy.Y >= this.backgroundHeight - bottomBorderForMovement)
+                        {
+                            this.StepCloser = false;
+                        }
                     }
                 }
                 this.countSteps--;

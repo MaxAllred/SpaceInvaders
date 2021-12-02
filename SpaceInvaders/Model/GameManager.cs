@@ -298,6 +298,10 @@ namespace SpaceInvaders.Model
             }
             else if (this.EnemyManager.AllEnemies.Count == 0)
             {
+                foreach (var currentBullet in playerBullets)
+                {
+                    currentBullet.Y = 0 - currentBullet.Height;
+                }
                 this.level++;
                 this.EnemyManager.GenerateNewLevel(this.level);
             }
