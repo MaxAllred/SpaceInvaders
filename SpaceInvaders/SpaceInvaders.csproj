@@ -197,6 +197,7 @@
     <Content Include="Assets\Audio\Flash-laser-03.wav" />
     <Content Include="Assets\Audio\Flash-laser-09.wav" />
     <Content Include="Assets\Audio\gameover.wav" />
+    <Content Include="Assets\Audio\mixkit-video-game-win-2016.wav" />
     <Content Include="Assets\Audio\Rubber-snap-01.wav" />
     <Content Include="Notes.txt" />
     <Content Include="Properties\Default.rd.xml" />
