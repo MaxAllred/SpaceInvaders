@@ -104,7 +104,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void MoveRight()
         {
-            if (this.location.X > WidthOfScreen - HorizontalScreenOffset - this.Width)
+            if (this.location.X > WidthOfScreen - HorizontalScreenOffset)
             {
                 return;
             }
