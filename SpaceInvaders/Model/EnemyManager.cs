@@ -23,6 +23,7 @@ namespace SpaceInvaders.Model
         private const int MaxSteps = 28;
 
         public readonly Collection<EnemyShip> AllEnemies;
+        public BonusEnemyShip bonusShip;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
         private bool StepCloser = false;
@@ -41,6 +42,7 @@ namespace SpaceInvaders.Model
             sound = new SoundManager();
             this.background = background;
             this.AllEnemies = new Collection<EnemyShip>();
+            this.bonusShip = new BonusEnemyShip();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
             this.countSteps = MaxSteps / 2;
@@ -85,6 +87,10 @@ namespace SpaceInvaders.Model
                 this.MoveRight = !this.MoveRight;
             }
 
+            this.bonusShip.MoveRight();
+
+
+
             
         }
 
@@ -92,6 +98,8 @@ namespace SpaceInvaders.Model
         {
             this.createAllEnemyShips();
             this.positionEnemies();
+
+            this.createBonusShip();
         }
 
         private void createAllEnemyShips()
@@ -127,6 +135,14 @@ namespace SpaceInvaders.Model
             this.background.Children.Add(newShip.Sprite1);
             this.background.Children.Add(newShip.Sprite2);
             this.AllEnemies.Add(newShip);
+        }
+
+        private void createBonusShip()
+        {
+            int startingY = 25;
+            this.background.Children.Add(this.bonusShip.Sprite);
+            this.bonusShip.X = 0;
+            this.bonusShip.Y = startingY;
         }
 
         private void positionEnemies()
