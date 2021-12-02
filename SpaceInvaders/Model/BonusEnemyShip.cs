@@ -21,7 +21,7 @@ namespace SpaceInvaders.Model
             this.PointValue = 50;
             this.CanShoot = true;
 
-            SetSpeed(10, 1);
+            SetSpeed(12, 1);
         }
     }
 }
