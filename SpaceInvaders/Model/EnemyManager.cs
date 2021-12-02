@@ -12,10 +12,10 @@ namespace SpaceInvaders.Model
         private readonly double backgroundWidth;
         private readonly Canvas background;
 
-        private const int Level1ShipCount = 2;
-        private const int Level2ShipCount = 4;
-        private const int Level3ShipCount = 6;
-        private const int Level4ShipCount = 8;
+        private int Level1ShipCount = 2;
+        private int Level2ShipCount = 4;
+        private int Level3ShipCount = 6;
+        private int Level4ShipCount = 8;
         private const int verticalSpaceBetweenRows = 20;
 
         private const int MinSteps = -5;
@@ -24,6 +24,7 @@ namespace SpaceInvaders.Model
         public readonly Collection<EnemyShip> AllEnemies;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
+        private bool StepCloser = false;
         public bool CeaseFire = false;
         private SoundManager sound;
         
@@ -66,6 +67,10 @@ namespace SpaceInvaders.Model
                 {
                     currentEnemy.Animate();
                     currentEnemy.MoveLeft();
+                    if (StepCloser == true)
+                    {
+                        currentEnemy.MoveDown();
+                    }
                 }
                 this.countSteps--;
             }
@@ -74,6 +79,8 @@ namespace SpaceInvaders.Model
             {
                 this.MoveRight = !this.MoveRight;
             }
+
+            
         }
 
         public void CreateAndPlaceAllEnemyShips()
@@ -196,6 +203,34 @@ namespace SpaceInvaders.Model
                 sound.enemyShot();
 
             }
+        }
+
+        public void GenerateNewLevel(int level)
+        {
+            if(level == 2)
+            {
+                this.Level1ShipCount = 4;
+                this.Level2ShipCount = 6;
+                this.Level3ShipCount = 8;
+                this.Level4ShipCount = 10;
+                this.MoveRight = true;
+                this.countSteps = MaxSteps / 2;
+                this.createAllEnemyShips();
+                this.positionEnemies();
+            }
+            else if (level == 3)
+            {
+                this.Level1ShipCount = 10;
+                this.Level2ShipCount = 8;
+                this.Level3ShipCount = 6;
+                this.Level4ShipCount = 4;
+                this.MoveRight = true;
+                this.StepCloser = true;
+                this.countSteps = MaxSteps / 2;
+                this.createAllEnemyShips();
+                this.positionEnemies();
+            }
+            
         }
 
         #endregion

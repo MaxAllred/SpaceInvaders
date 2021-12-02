@@ -80,11 +80,7 @@ namespace SpaceInvaders.View
                     this.leftright[1] = true;
                     break;
                 case VirtualKey.Space:
-                    if (this.fireRate > 2)
-                    {
-                        this.gameManager.FirePlayerBullet();
-                        this.fireRate = 0;
-                    }
+                    this.leftright[2] = true;
 
                     break;
             }
@@ -99,6 +95,9 @@ namespace SpaceInvaders.View
                 case VirtualKey.Right:
                     this.leftright[1] = false;
                     break;
+                case VirtualKey.Space:
+                    this.leftright[2] = false;
+                    break;
             }
         }
 
@@ -112,6 +111,15 @@ namespace SpaceInvaders.View
             if (this.leftright[1])
             {
                 this.gameManager.MovePlayerShipRight();
+            }
+
+            if (this.leftright[2])
+            {
+                if (this.fireRate > 2)
+                {
+                    this.gameManager.FirePlayerBullet();
+                    this.fireRate = 0;
+                }
             }
         }
 

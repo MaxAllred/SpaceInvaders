@@ -11,7 +11,7 @@ namespace SpaceInvaders.Model
     public abstract class EnemyShip : GameObject
     {
         protected const int SpeedXDirection = 8;
-        protected const int SpeedYDirection = 0;
+        protected const int SpeedYDirection = 1;
 
         public bool CanShoot { get; protected set; }
         public int PointValue { get; protected set; }

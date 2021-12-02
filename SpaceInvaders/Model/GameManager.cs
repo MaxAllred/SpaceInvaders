@@ -27,7 +27,7 @@ namespace SpaceInvaders.Model
         public int Score;
         public bool GameOver;
         public event EventHandler ScoreChanged;
-
+        private int level;
         public EnemyManager EnemyManager;
         private int activeBullets;
         private readonly double backgroundHeight;
@@ -100,7 +100,8 @@ namespace SpaceInvaders.Model
         /// <param name="theBackground">The background canvas.</param>
         public void InitializeGame(Canvas theBackground)
         {
-            sound = new SoundManager();
+            this.level = 1;
+            this.sound = new SoundManager();
             this.background = theBackground ?? throw new ArgumentNullException(nameof(theBackground));
             this.createAndPlacePlayerShip();
             this.playerLives = new Collection<Heart>();
@@ -288,10 +289,16 @@ namespace SpaceInvaders.Model
 
         private void checkAllEliminated()
         {
-            if (this.EnemyManager.AllEnemies.Count == 0)
+            
+            if (this.EnemyManager.AllEnemies.Count == 0 && this.level >= 3)
             {
                 this.allEliminated = true;
                 this.GameOver = true;
+            }
+            else if (this.EnemyManager.AllEnemies.Count == 0)
+            {
+                this.level++;
+                this.EnemyManager.GenerateNewLevel(this.level);
             }
         }
 
