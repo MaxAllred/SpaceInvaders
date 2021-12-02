@@ -88,10 +88,10 @@ namespace SpaceInvaders.Model
             }
 
             this.bonusShip.MoveRight();
-
-
-
-            
+            if (this.bonusShip.X > this.backgroundWidth)
+            {
+                this.background.Children.Remove(this.bonusShip.Sprite);
+            }
         }
 
         public void CreateAndPlaceAllEnemyShips()
