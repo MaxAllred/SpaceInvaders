@@ -30,6 +30,7 @@ namespace SpaceInvaders.View
         private int fireRate;
 
         private readonly GameManager gameManager;
+        private bool[] leftright;
 
         #endregion
 
@@ -46,12 +47,18 @@ namespace SpaceInvaders.View
             enemyTimer.Tick += this.timeTick;
             enemyTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             enemyTimer.Start();
-
+            DispatcherTimer playerTimer = new DispatcherTimer();
+            playerTimer.Tick += this.timeTickPlayer;
+            playerTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            playerTimer.Start();
+            leftright = new bool[3];
             ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
+            Window.Current.CoreWindow.KeyUp += this.coreWindowOnKeyUp;
+            
 
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
@@ -65,11 +72,12 @@ namespace SpaceInvaders.View
         {
             switch (args.VirtualKey)
             {
+                
                 case VirtualKey.Left:
-                    this.gameManager.MovePlayerShipLeft();
+                    this.leftright[0] = true;
                     break;
                 case VirtualKey.Right:
-                    this.gameManager.MovePlayerShipRight();
+                    this.leftright[1] = true;
                     break;
                 case VirtualKey.Space:
                     if (this.fireRate > 2)
@@ -81,9 +89,35 @@ namespace SpaceInvaders.View
                     break;
             }
         }
+        private void coreWindowOnKeyUp(CoreWindow sender, KeyEventArgs args)
+        {
+            switch (args.VirtualKey)
+            {
+                case VirtualKey.Left:
+                    this.leftright[0] = false;
+                    break;
+                case VirtualKey.Right:
+                    this.leftright[1] = false;
+                    break;
+            }
+        }
+
+        private void timeTickPlayer(object sender, object e)
+        {
+            if (this.leftright[0])
+            {
+                this.gameManager.MovePlayerShipLeft();
+            }
+
+            if (this.leftright[1])
+            {
+                this.gameManager.MovePlayerShipRight();
+            }
+        }
 
         private void timeTick(object sender, object e)
         {
+            
             this.fireRate++;
             var rand = new Random();
             if (rand.Next(10) == 1)
