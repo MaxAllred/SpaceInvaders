@@ -137,6 +137,8 @@
     <Compile Include="Model\Level4Enemy.cs" />
     <Compile Include="Model\Level4EnemyFactory.cs" />
     <Compile Include="Model\PlayerShip.cs" />
+    <Compile Include="Model\SoundManager.cs" />
+    <Compile Include="Model\SoundPlayer.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -191,6 +193,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Audio\Flash-laser-03.wav" />
     <Content Include="Notes.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

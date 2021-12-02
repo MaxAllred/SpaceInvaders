@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using Windows.Devices.Printers;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -38,6 +41,7 @@ namespace SpaceInvaders.Model
         private Canvas background;
         private bool allEliminated;
         private TextBlock scoreTextBlock;
+        private SoundManager sound;
 
         #endregion
 
@@ -96,6 +100,7 @@ namespace SpaceInvaders.Model
         /// <param name="theBackground">The background canvas.</param>
         public void InitializeGame(Canvas theBackground)
         {
+            sound = new SoundManager();
             this.background = theBackground ?? throw new ArgumentNullException(nameof(theBackground));
             this.createAndPlacePlayerShip();
             this.playerLives = new Collection<Heart>();
@@ -180,11 +185,15 @@ namespace SpaceInvaders.Model
         {
             if (this.activeBullets < bulletCount)
             {
+                
                 this.background.Children.Add(this.playerBullets[this.activeBullets].Sprite);
                 this.playerBullets[this.activeBullets].X = this.playerShip.X + this.playerShip.Width / 2 -
                                                            this.playerBullets[this.activeBullets].Width / 2;
                 this.playerBullets[this.activeBullets].Y = this.playerShip.Y - this.playerShip.Height;
                 this.activeBullets++;
+                
+                sound.playerShot();
+
                 return;
             }
 
@@ -195,6 +204,7 @@ namespace SpaceInvaders.Model
                     this.playerBullets[i].X =
                         this.playerShip.X + this.playerShip.Width / 2 - this.playerBullets[i].Width / 2;
                     this.playerBullets[i].Y = this.playerShip.Y - this.playerShip.Height;
+                    sound.playerShot();
                     return;
                 }
             }
