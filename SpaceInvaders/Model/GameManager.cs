@@ -244,6 +244,7 @@ namespace SpaceInvaders.Model
 
         private void registerHit(BaseSprite currentSprite, int bulletNumber)
         {
+            sound.playerBulletHit();
             this.background.Children.Remove(currentSprite);
 
             this.playerBullets[bulletNumber].Y = 0  - this.playerBullets[bulletNumber].Height;
@@ -268,16 +269,20 @@ namespace SpaceInvaders.Model
 
         private void registerHitFromEnemy()
         {
+            
             this.background.Children.Remove(this.playerLives[this.playerLives.Count - 1].Sprite);
             this.playerLives.RemoveAt(this.playerLives.Count - 1);
             this.EnemyManager.EnemyBullet.Y = this.backgroundHeight;
             this.background.Children.Remove(this.EnemyManager.EnemyBullet.Sprite);
+            this.sound.enemyBulletHit();
 
             if (this.playerLives.Count == 0)
             {
+                sound.gameOver();
                 this.background.Children.Remove(this.playerShip.Sprite);
                 this.background.Children.Remove(this.EnemyManager.EnemyBullet.Sprite);
                 this.GameOver = true;
+                this.EnemyManager.CeaseFire = true;
             }
         }
 
@@ -293,14 +298,17 @@ namespace SpaceInvaders.Model
         public void HandleGameOver()
         {
             var gameOverText = new GameOverText(0);
+           
             if (this.allEliminated)
             {
                 gameOverText = new GameOverText(1);
+                
             }
 
+           
             this.background.Children.Add(gameOverText.Sprite);
             gameOverText.X = this.backgroundWidth / 2 - gameOverText.Width / 2;
-
+            
             gameOverText.Y = TextBottomOffset;
         }
 

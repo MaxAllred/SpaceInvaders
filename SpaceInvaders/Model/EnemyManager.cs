@@ -24,6 +24,8 @@ namespace SpaceInvaders.Model
         public readonly Collection<EnemyShip> AllEnemies;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
+        public bool CeaseFire = false;
+        private SoundManager sound;
         
         private int countSteps;
         
@@ -34,6 +36,7 @@ namespace SpaceInvaders.Model
 
         public EnemyManager(Canvas background)
         {
+            sound = new SoundManager();
             this.background = background;
             this.AllEnemies = new Collection<EnemyShip>();
             this.backgroundHeight = this.background.Height;
@@ -158,6 +161,10 @@ namespace SpaceInvaders.Model
 
         public void FireEnemyBullet()
         {
+            if (CeaseFire)
+            {
+                return;
+            }
             var rand = new Random();
             var countOfFiringEnemies = 0;
             foreach (var current in this.AllEnemies)
@@ -174,16 +181,20 @@ namespace SpaceInvaders.Model
             }
 
             var enemy = this.AllEnemies[this.AllEnemies.Count - 1 - rand.Next(countOfFiringEnemies)];
+
             if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
             {
                 this.background.Children.Add(this.EnemyBullet.Sprite);
                 this.EnemyBullet.Y = this.backgroundHeight + this.EnemyBullet.Height;
+                sound.enemyShot();
             }
 
             if (this.EnemyBullet.Y >= this.backgroundHeight)
             {
                 this.EnemyBullet.X = enemy.X + enemy.Width / 2 - this.EnemyBullet.Width / 2;
                 this.EnemyBullet.Y = enemy.Y;
+                sound.enemyShot();
+
             }
         }
 
