@@ -234,6 +234,11 @@ namespace SpaceInvaders.Model
                         this.registerHit(currentEnemy.Sprite, bulletIndex);
                     }
                 }
+                if (this.background.Children.Contains(this.EnemyManager.bonusShip.Sprite))
+                {
+                    this.Score += this.EnemyManager.bonusShip.PointValue;
+                    this.registerHit(this.EnemyManager.bonusShip.Sprite, bulletIndex);
+                }
             }
         }
 
