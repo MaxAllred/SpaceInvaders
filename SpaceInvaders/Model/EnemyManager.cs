@@ -233,7 +233,7 @@ namespace SpaceInvaders.Model
             if (this.background.Children.Contains(this.bonusShip.Sprite))
             {
                 this.Shoot(this.bonusShip);
-                this.sound.bonusEnemyShot();
+                
             }
             else
             {
@@ -241,7 +241,7 @@ namespace SpaceInvaders.Model
                 if (enemy != null)
                 {
                     this.Shoot(enemy);
-                    this.sound.enemyShot();
+                    
                 }
             }
         }
@@ -274,6 +274,7 @@ namespace SpaceInvaders.Model
 
             if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
             {
+                this.sound.enemyShot();
                 this.background.Children.Add(this.EnemyBullet.Sprite);
                 this.EnemyBullet.Y = enemy.Y + enemy.Height + this.EnemyBullet.Height;
                 this.EnemyBullet.X = enemy.X + .5 * enemy.Width - .5 * this.EnemyBullet.Width;
