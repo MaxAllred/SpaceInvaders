@@ -259,7 +259,7 @@ namespace SpaceInvaders.Model
             if(shootingEnemies > 0)
             {
                 Random random = new Random();
-                return this.AllEnemies[random.Next(shootingEnemies + 1)];
+                return this.AllEnemies[random.Next(shootingEnemies)];
             }
 
             return null;
