@@ -58,6 +58,12 @@ namespace SpaceInvaders.Model
             sp.Play(@"Assets/Audio/Rubber-snap-01.wav", "enemyShotHit");
         }
 
+        public void bonusEnemyHit()
+        {
+            sp = new SoundPlayer();
+            sp.Play(@"Assets/Audio/mixkit-arcade-video-game-bonus-2044.wav", "bonusEnemyHit");
+        }
+
         /// <summary>
         ///     Plays the game over sound.
         /// </summary>
