@@ -26,6 +26,7 @@ namespace SpaceInvaders.Model
         private static readonly int bulletCount = 3;
         public int Score;
         public bool GameOver;
+        public bool PowerUp;
         public event EventHandler ScoreChanged;
         private int level;
         public EnemyManager EnemyManager;
@@ -65,6 +66,7 @@ namespace SpaceInvaders.Model
                 throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
             }
 
+            this.PowerUp = false;
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
         }
@@ -142,6 +144,13 @@ namespace SpaceInvaders.Model
                 offset += current.Width * 1.25;
                 current.Y = this.backgroundHeight - current.Height;
             }
+        }
+
+        internal void EndPowerUp()
+        {
+            this.PowerUp = false;
+            this.playerShip.ToggleInvincible();
+            this.EnemyManager.BonusActive = false;
         }
 
         private void createAndPlacePlayerShip()
@@ -239,6 +248,10 @@ namespace SpaceInvaders.Model
                     if (bullet.CheckForCollision(this.EnemyManager.bonusShip)) {
                         this.Score += this.EnemyManager.bonusShip.PointValue;
                         this.registerHit(this.EnemyManager.bonusShip.Sprite, bulletIndex);
+                        this.PowerUp = true;
+                        this.sound.invincible();
+                        this.playerShip.ToggleInvincible();
+                        this.EnemyManager.BonusActive = true;
                     }
                     
                 }
@@ -253,6 +266,7 @@ namespace SpaceInvaders.Model
 
         private void registerHit(BaseSprite currentSprite, int bulletNumber)
         {
+            this.playerShip.ToggleInvincible();
             sound.playerBulletHit();
             this.background.Children.Remove(currentSprite);
 
@@ -272,7 +286,11 @@ namespace SpaceInvaders.Model
         {
             if (this.EnemyManager.EnemyBullet.CheckForCollision(this.playerShip))
             {
-                this.registerHitFromEnemy();
+                if (!this.PowerUp)
+                {
+                    this.registerHitFromEnemy();
+                }
+                
             }
         }
 

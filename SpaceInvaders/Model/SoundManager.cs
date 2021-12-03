@@ -81,5 +81,11 @@ namespace SpaceInvaders.Model
             sp = new SoundPlayer();
             sp.Play(@"Assets/Audio/mixkit-video-game-win-2016.wav", "youWin");
         }
+
+        public void invincible()
+        {
+            sp = new SoundPlayer();
+            sp.Play(@"Assets/Audio/invincible-sound.wav", "invincible");
+        }
     }
 }

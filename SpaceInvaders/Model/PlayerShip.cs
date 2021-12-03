@@ -1,4 +1,6 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using System.Threading;
+using Windows.UI.Xaml;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -13,6 +15,8 @@ namespace SpaceInvaders.Model
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
 
+        public BaseSprite Sprite1 { get; protected set; }
+        public BaseSprite Sprite2 { get; protected set; }
         #endregion
 
         #region Constructors
@@ -22,8 +26,15 @@ namespace SpaceInvaders.Model
         /// </summary>
         public PlayerShip()
         {
-            Sprite = new PlayerShipSprite();
+            this.Sprite1 = new PlayerShipSprite();
+            this.Sprite2 = new PlayerShipInvincibleSprite();
+            
+            Sprite = this.Sprite1;
             SetSpeed(SpeedXDirection, SpeedYDirection);
+        }
+        public void ToggleInvincible()
+        {
+            return;
         }
 
         #endregion

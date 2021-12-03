@@ -26,12 +26,14 @@ namespace SpaceInvaders.Model
         public bool MoveRight = true;
         private bool StepCloser = false;
         public bool CeaseFire = false;
+        public bool BonusActive = false;
         private SoundManager sound;
         private int Level1ShipCount = 2;
         private int Level2ShipCount = 4;
         private int Level3ShipCount = 6;
         private int Level4ShipCount = 8;
         private int Level;
+        
 
         private int countSteps;
         
@@ -242,7 +244,7 @@ namespace SpaceInvaders.Model
 
         private void randomBonusEnemy()
         {
-            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            if (this.background.Children.Contains(this.bonusShip.Sprite) || this.BonusActive)
             {
                 return;
             }

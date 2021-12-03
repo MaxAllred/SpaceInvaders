@@ -6,7 +6,7 @@ namespace SpaceInvaders.View.Sprites
     ///     Draws a player ship.
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
-    public partial class PlayerShipSprite
+    public partial class PlayerShipInvincibleSprite
     {
         #region Constructors
 
@@ -15,7 +15,7 @@ namespace SpaceInvaders.View.Sprites
         ///     Precondition: none
         ///     Postcondition: Sprite created.
         /// </summary>
-        public PlayerShipSprite()
+        public PlayerShipInvincibleSprite()
         {
             this.InitializeComponent();
         }

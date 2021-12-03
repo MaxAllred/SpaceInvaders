@@ -28,7 +28,7 @@ namespace SpaceInvaders.View
         public const double ApplicationWidth = 960;
 
         private int fireRate;
-
+        private int powerUpDuration;
         private readonly GameManager gameManager;
         private bool[] leftright;
         DispatcherTimer enemyTimer;
@@ -55,6 +55,7 @@ namespace SpaceInvaders.View
             playerTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             playerTimer.Start();
             leftright = new bool[3];
+            this.powerUpDuration = 0;
             ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
@@ -147,6 +148,18 @@ namespace SpaceInvaders.View
                 this.gameManager.MoveElements();
 
                 this.gameManager.CheckForCollisions();
+            }
+
+            if (this.gameManager.PowerUp)
+            {
+                this.powerUpDuration++;
+                
+                if (this.powerUpDuration >= 50)
+                {
+                    this.gameManager.EndPowerUp();
+                    this.powerUpDuration = 0;
+                    
+                }
             }
         }
 

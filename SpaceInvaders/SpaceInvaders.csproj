@@ -187,6 +187,9 @@
     <Compile Include="View\Sprites\Level4EnemySprite2.xaml.cs">
       <DependentUpon>Level4EnemySprite2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\PlayerShipInvincibleSprite.xaml.cs">
+      <DependentUpon>PlayerShipInvincibleSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\PlayerShipSprite.xaml.cs">
       <DependentUpon>PlayerShipSprite.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,7 @@
     <Content Include="Assets\Audio\Flash-laser-03.wav" />
     <Content Include="Assets\Audio\Flash-laser-09.wav" />
     <Content Include="Assets\Audio\gameover.wav" />
+    <Content Include="Assets\Audio\invincible-sound.wav" />
     <Content Include="Assets\Audio\mixkit-arcade-video-game-bonus-2044.wav" />
     <Content Include="Assets\Audio\mixkit-game-whip-shot-1512.wav" />
     <Content Include="Assets\Audio\mixkit-video-game-win-2016.wav" />
@@ -277,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\Level4EnemySprite2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\PlayerShipInvincibleSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
