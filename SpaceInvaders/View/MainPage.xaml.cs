@@ -31,6 +31,9 @@ namespace SpaceInvaders.View
 
         private readonly GameManager gameManager;
         private bool[] leftright;
+        DispatcherTimer enemyTimer;
+        DispatcherTimer playerTimer = new DispatcherTimer();
+        private bool isPaused = false;
 
         #endregion
 
@@ -41,13 +44,13 @@ namespace SpaceInvaders.View
         /// </summary>
         public MainPage()
         {
-            DispatcherTimer enemyTimer;
+            
             this.InitializeComponent();
             enemyTimer = new DispatcherTimer();
             enemyTimer.Tick += this.timeTick;
             enemyTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             enemyTimer.Start();
-            DispatcherTimer playerTimer = new DispatcherTimer();
+            
             playerTimer.Tick += this.timeTickPlayer;
             playerTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             playerTimer.Start();
@@ -82,6 +85,12 @@ namespace SpaceInvaders.View
                 case VirtualKey.Space:
                     this.leftright[2] = true;
 
+                    break;
+                case VirtualKey.P:
+                    this.pauseGame();
+                    break;
+                case VirtualKey.U:
+                    this.unpauseGame();
                     break;
             }
         }
@@ -138,6 +147,25 @@ namespace SpaceInvaders.View
                 this.gameManager.MoveElements();
 
                 this.gameManager.CheckForCollisions();
+            }
+        }
+
+        private void pauseGame()
+        {
+            this.isPaused = true;
+            if (this.isPaused == true)
+            {
+                this.enemyTimer.Stop();
+                this.playerTimer.Stop();
+            }
+        }
+
+        private void unpauseGame()
+        {
+            if (this.isPaused)
+            {
+                this.enemyTimer.Start();
+                this.playerTimer.Start();
             }
         }
 
