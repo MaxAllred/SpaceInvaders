@@ -45,7 +45,7 @@ namespace SpaceInvaders.Model
             intersect.Intersect(shipBoundary);
 
             if (intersect.IsEmpty) return false;
-            else return true;
+            return true;
         }
 
         #endregion

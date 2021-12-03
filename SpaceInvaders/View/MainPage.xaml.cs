@@ -125,13 +125,9 @@ namespace SpaceInvaders.View
 
         private void timeTick(object sender, object e)
         {
-            
             this.fireRate++;
-            var rand = new Random();
-            if (rand.Next(10) == 1)
-            {
-                this.gameManager.EnemyManager.FireEnemyBullet();
-            }
+
+            this.gameManager.EnemyManager.OnTick();
 
             if (this.gameManager.GameOver)
             {
@@ -143,7 +139,6 @@ namespace SpaceInvaders.View
 
                 this.gameManager.CheckForCollisions();
             }
-            this.gameManager.EnemyManager.FireBonusEnemyBullet();
         }
 
         #endregion

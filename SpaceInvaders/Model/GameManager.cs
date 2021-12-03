@@ -84,12 +84,13 @@ namespace SpaceInvaders.Model
                 }
             }
 
+            /*
             if (this.background.Children.Contains(this.EnemyManager.EnemyBullet.Sprite))
             {
                 this.EnemyManager.EnemyBullet.MoveDown();
-            }
+            }*/
 
-            this.EnemyManager.MoveAllEnemies();
+            //this.EnemyManager.MoveAllElements();
         }
 
         /// <summary>
@@ -110,7 +111,6 @@ namespace SpaceInvaders.Model
             this.EnemyManager.CreateAndPlaceAllEnemyShips();
             this.playerBullets = new Collection<Bullet>();
             this.createPlayerBullets();
-            this.EnemyManager.EnemyBullet = new Bullet();
         }
 
         private void createPlayerBullets()

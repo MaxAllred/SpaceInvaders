@@ -46,14 +46,15 @@ namespace SpaceInvaders.Model
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
             this.countSteps = MaxSteps / 2;
+            this.EnemyBullet = new Bullet();
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>Moves all enemies.</summary>
-        public void MoveAllEnemies()
+        /// <summary>Moves all elements.</summary>
+        public void MoveAllElements()
         {
             if (this.MoveRight)
             {
@@ -70,7 +71,7 @@ namespace SpaceInvaders.Model
                 {
                     currentEnemy.Animate();
                     currentEnemy.MoveLeft();
-                    if (StepCloser == true)
+                    if (this.StepCloser)
                     {
                         currentEnemy.MoveDown();
                         if (currentEnemy.Y >= this.backgroundHeight - bottomBorderForMovement)
@@ -87,43 +88,91 @@ namespace SpaceInvaders.Model
                 this.MoveRight = !this.MoveRight;
             }
 
-            this.bonusShip.MoveRight();
+
+            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            {
+                this.bonusShip.MoveRight();
+            }
+
             if (this.bonusShip.X + this.bonusShip.SpeedX + this.bonusShip.Width > this.backgroundWidth)
             {
                 this.background.Children.Remove(this.bonusShip.Sprite);
             }
+
+            if (this.background.Children.Contains(this.EnemyBullet.Sprite))
+            {
+                this.EnemyBullet.MoveDown();
+
+                if (this.EnemyBullet.Y > (this.backgroundHeight))
+                {
+                    this.background.Children.Remove(this.EnemyBullet.Sprite);
+                }
+
+            }
+
         }
 
         public void CreateAndPlaceAllEnemyShips()
         {
             this.createAllEnemyShips();
             this.positionEnemies();
+        }
 
-            this.createBonusShip();
+        public void OnTick()
+        {
+            this.randomShot();
+            this.randomBonusEnemy();
+            this.MoveAllElements();
+        }
+
+        private void randomShot()
+        {
+            var rand = new Random();
+            if (rand.Next(10) == 1)
+            {
+                this.ChooseEnemyAndShoot();
+            }
+        }
+
+        private void randomBonusEnemy()
+        {
+            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            {
+                return;
+            }
+
+            var rand = new Random();
+            if (rand.Next(100) == 1)
+            {
+                int startingY = 25;
+                this.background.Children.Add(this.bonusShip.Sprite);
+                this.bonusShip.X = 0;
+                this.bonusShip.Y = startingY;
+            }
         }
 
         private void createAllEnemyShips()
         {
             EnemyFactory factory = new Level4EnemyFactory();
-            for (int i = 0; i < Level4ShipCount; i++)
+            for (int i = 0; i < this.Level4ShipCount; i++)
             {
                 this.createEnemyShip(factory);
             }
 
             factory = new Level3EnemyFactory();
-            for (int i = 0; i < Level3ShipCount; i++)
+            for (int i = 0; i < this.Level3ShipCount; i++)
             {
                 this.createEnemyShip(factory);
             }
 
             factory = new Level2EnemyFactory();
-            for (int i = 0; i < Level2ShipCount; i++)
+            for (int i = 0; i < this.Level2ShipCount; i++)
             {
                 this.createEnemyShip(factory);
             }
 
             factory = new Level1EnemyFactory();
-            for (int i = 0; i < Level1ShipCount; i++)
+            for (int i = 0; i < this.Level1ShipCount; i++)
             {
                 this.createEnemyShip(factory);
             }
@@ -137,14 +186,6 @@ namespace SpaceInvaders.Model
             this.AllEnemies.Add(newShip);
         }
 
-        private void createBonusShip()
-        {
-            int startingY = 25;
-            this.background.Children.Add(this.bonusShip.Sprite);
-            this.bonusShip.X = 0;
-            this.bonusShip.Y = startingY;
-        }
-
         private void positionEnemies()
         {
             var shipWidth = this.AllEnemies[0].Width;
@@ -156,28 +197,28 @@ namespace SpaceInvaders.Model
                 int shipsPerRow;
                 int shipNumberInRow = shipIndex;
 
-                if (shipIndex < Level4ShipCount)
+                if (shipIndex < this.Level4ShipCount)
                 {
                     rowNumberFromTop = 1;
-                    shipsPerRow = Level4ShipCount;
+                    shipsPerRow = this.Level4ShipCount;
                 }
-                else if (shipIndex < Level4ShipCount + Level3ShipCount)
+                else if (shipIndex < this.Level4ShipCount + this.Level3ShipCount)
                 {
                     rowNumberFromTop = 2;
-                    shipsPerRow = Level3ShipCount;
-                    shipNumberInRow -= Level4ShipCount;
+                    shipsPerRow = this.Level3ShipCount;
+                    shipNumberInRow -= this.Level4ShipCount;
                 } 
-                else if (shipIndex < Level4ShipCount + Level3ShipCount + Level2ShipCount)
+                else if (shipIndex < this.Level4ShipCount + this.Level3ShipCount + this.Level2ShipCount)
                 {
                     rowNumberFromTop = 3;
-                    shipsPerRow = Level2ShipCount;
-                    shipNumberInRow -= Level4ShipCount + Level3ShipCount;
+                    shipsPerRow = this.Level2ShipCount;
+                    shipNumberInRow -= this.Level4ShipCount + this.Level3ShipCount;
                 }
                 else
                 {
                     rowNumberFromTop = 4;
-                    shipsPerRow = Level1ShipCount;
-                    shipNumberInRow -= Level4ShipCount + Level3ShipCount + Level2ShipCount;
+                    shipsPerRow = this.Level1ShipCount;
+                    shipNumberInRow -= this.Level4ShipCount + this.Level3ShipCount + this.Level2ShipCount;
                 }
 
                 double distanceFromLeft =
@@ -187,66 +228,55 @@ namespace SpaceInvaders.Model
             }
         }
 
-        public void FireEnemyBullet()
+        public void ChooseEnemyAndShoot()
         {
-            if (CeaseFire)
+            if (this.background.Children.Contains(this.bonusShip.Sprite))
             {
-                return;
+                this.Shoot(this.bonusShip);
+                //todo: play bonus enemy shot sound
             }
-            var rand = new Random();
-            var countOfFiringEnemies = 0;
-            foreach (var current in this.AllEnemies)
+            else
             {
-                if (current.CanShoot)
+                EnemyShip enemy = this.chooseRandomEnemy();
+                if (enemy != null)
                 {
-                    countOfFiringEnemies++;
+                    this.Shoot(enemy);
+                    this.sound.enemyShot();
                 }
-            }
-
-            if (countOfFiringEnemies == 0)
-            {
-                return;
-            }
-
-            var enemy = this.AllEnemies[this.AllEnemies.Count - 1 - rand.Next(countOfFiringEnemies)];
-
-            if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
-            {
-                this.background.Children.Add(this.EnemyBullet.Sprite);
-                this.EnemyBullet.Y = this.backgroundHeight + this.EnemyBullet.Height;
-                sound.enemyShot();
-            }
-
-            if (this.EnemyBullet.Y >= this.backgroundHeight)
-            {
-                this.EnemyBullet.X = enemy.X + enemy.Width / 2 - this.EnemyBullet.Width / 2;
-                this.EnemyBullet.Y = enemy.Y;
-                sound.enemyShot();
-
             }
         }
 
-        public void FireBonusEnemyBullet()
+
+        private EnemyShip chooseRandomEnemy()
         {
-            if (CeaseFire)
+            int shootingEnemies = 0;
+
+            foreach(var enemy in this.AllEnemies)
+            {
+                if (enemy.CanShoot) shootingEnemies++;
+            }
+
+            if(shootingEnemies > 0)
+            {
+                Random random = new Random();
+                return this.AllEnemies[random.Next(shootingEnemies + 1)];
+            }
+
+            return null;
+        }
+
+        public void Shoot(EnemyShip enemy)
+        {
+            if (this.CeaseFire)
             {
                 return;
             }
-            var rand = new Random();
 
             if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
             {
                 this.background.Children.Add(this.EnemyBullet.Sprite);
-                this.EnemyBullet.Y = this.backgroundHeight + this.EnemyBullet.Height;
-                //sound.enemyShot();
-            }
-
-            if (this.EnemyBullet.Y >= this.backgroundHeight)
-            {
-                this.EnemyBullet.X = this.bonusShip.X + this.bonusShip.Width / 2 - this.EnemyBullet.Width / 2;
-                this.EnemyBullet.Y = this.bonusShip.Y;
-                //sound.enemyShot();
-
+                this.EnemyBullet.Y = enemy.Y + enemy.Height + this.EnemyBullet.Height;
+                this.EnemyBullet.X = enemy.X + .5 * enemy.Width - .5 * this.EnemyBullet.Width;
             }
         }
 
