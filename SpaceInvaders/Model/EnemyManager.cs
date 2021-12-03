@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
 
 namespace SpaceInvaders.Model
@@ -12,10 +13,7 @@ namespace SpaceInvaders.Model
         private readonly double backgroundWidth;
         private readonly Canvas background;
 
-        private int Level1ShipCount = 2;
-        private int Level2ShipCount = 4;
-        private int Level3ShipCount = 6;
-        private int Level4ShipCount = 8;
+        
         private const int verticalSpaceBetweenRows = 20;
         private const int bottomBorderForMovement = 120;
 
@@ -29,7 +27,12 @@ namespace SpaceInvaders.Model
         private bool StepCloser = false;
         public bool CeaseFire = false;
         private SoundManager sound;
-        
+        private int Level1ShipCount = 2;
+        private int Level2ShipCount = 4;
+        private int Level3ShipCount = 6;
+        private int Level4ShipCount = 8;
+        private int Level;
+
         private int countSteps;
         
 
@@ -47,6 +50,7 @@ namespace SpaceInvaders.Model
             this.backgroundWidth = this.background.Width;
             this.countSteps = MaxSteps / 2;
             this.EnemyBullet = new Bullet();
+            this.Level = 1;
         }
 
         #endregion
@@ -56,37 +60,18 @@ namespace SpaceInvaders.Model
         /// <summary>Moves all elements.</summary>
         public void MoveAllElements()
         {
-            if (this.MoveRight)
+            if (this.Level == 1)
             {
-                foreach (var currentEnemy in this.AllEnemies)
-                {
-                    currentEnemy.Animate();
-                    currentEnemy.MoveRight();
-                }
-                this.countSteps++;
+                this.level1movement();
+            }else if (this.Level == 2)
+            {
+                this.level2movement();
             }
             else
             {
-                foreach (var currentEnemy in this.AllEnemies)
-                {
-                    currentEnemy.Animate();
-                    currentEnemy.MoveLeft();
-                    if (this.StepCloser)
-                    {
-                        currentEnemy.MoveDown();
-                        if (currentEnemy.Y >= this.backgroundHeight - bottomBorderForMovement)
-                        {
-                            this.StepCloser = false;
-                        }
-                    }
-                }
-                this.countSteps--;
+                this.level3movement();
             }
-
-            if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
-            {
-                this.MoveRight = !this.MoveRight;
-            }
+            
 
 
             if (this.background.Children.Contains(this.bonusShip.Sprite))
@@ -110,6 +95,127 @@ namespace SpaceInvaders.Model
 
             }
 
+        }
+
+        private void level1movement()
+        {
+            if (this.MoveRight)
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    currentEnemy.Animate();
+                    currentEnemy.MoveRight();
+                }
+
+                this.countSteps++;
+            }
+            else
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    currentEnemy.Animate();
+                    currentEnemy.MoveLeft();
+                    
+                }
+
+                this.countSteps--;
+            }
+
+            if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
+            {
+                this.MoveRight = !this.MoveRight;
+            }
+        }
+        private void level2movement()
+        {
+            if (this.MoveRight)
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    if (currentEnemy.GetType().ToString() == "SpaceInvaders.Model.Level4Enemy" ||
+                        currentEnemy.GetType().ToString() == "SpaceInvaders.Model.Level3Enemy")
+                    {
+                        currentEnemy.Animate();
+                        currentEnemy.MoveRight();
+                    }
+                    else
+                    {
+                        currentEnemy.Animate();
+                        currentEnemy.MoveLeft();
+                    }
+
+                }
+
+                this.countSteps++;
+            }
+            else
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    if (currentEnemy.GetType().ToString() == "SpaceInvaders.Model.Level4Enemy" ||
+                        currentEnemy.GetType().ToString() == "SpaceInvaders.Model.Level3Enemy")
+                    {
+                        currentEnemy.Animate();
+                        currentEnemy.MoveLeft();
+                    }
+                    else
+                    {
+                        currentEnemy.Animate();
+                        currentEnemy.MoveRight();
+                    }
+                }
+
+                this.countSteps--;
+            }
+
+            if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
+            {
+                this.MoveRight = !this.MoveRight;
+            }
+        }
+        private void level3movement()
+        {
+            if (this.MoveRight)
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    currentEnemy.Animate();
+                    currentEnemy.MoveRight();
+                    if (!this.StepCloser)
+                    {
+                        currentEnemy.MoveUp();
+                        if (currentEnemy.Y <= 0 + currentEnemy.Height)
+                        {
+                            this.StepCloser = true;
+                        }
+                    }
+                }
+
+                this.countSteps++;
+            }
+            else
+            {
+                foreach (var currentEnemy in this.AllEnemies)
+                {
+                    currentEnemy.Animate();
+                    currentEnemy.MoveLeft();
+                    if (this.StepCloser)
+                    {
+                        currentEnemy.MoveDown();
+                        if (currentEnemy.Y >= this.backgroundHeight - bottomBorderForMovement)
+                        {
+                            this.StepCloser = false;
+                        }
+                    }
+                }
+
+                this.countSteps--;
+            }
+
+            if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
+            {
+                this.MoveRight = !this.MoveRight;
+            }
         }
 
         public void CreateAndPlaceAllEnemyShips()
@@ -283,6 +389,7 @@ namespace SpaceInvaders.Model
 
         public void GenerateNewLevel(int level)
         {
+            this.Level = level;
             if(level == 2)
             {
                 this.Level1ShipCount = 4;
@@ -293,6 +400,8 @@ namespace SpaceInvaders.Model
                 this.countSteps = MaxSteps / 2;
                 this.createAllEnemyShips();
                 this.positionEnemies();
+                
+
             }
             else if (level == 3)
             {
