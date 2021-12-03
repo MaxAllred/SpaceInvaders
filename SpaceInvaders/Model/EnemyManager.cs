@@ -233,7 +233,7 @@ namespace SpaceInvaders.Model
             if (this.background.Children.Contains(this.bonusShip.Sprite))
             {
                 this.Shoot(this.bonusShip);
-                //todo: play bonus enemy shot sound
+                this.sound.bonusEnemyShot();
             }
             else
             {
