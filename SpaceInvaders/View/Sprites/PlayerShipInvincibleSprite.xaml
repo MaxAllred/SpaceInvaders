@@ -15,10 +15,11 @@
 
 
     <Canvas>
-        <local:PlayerShipSprite/>
+        
         <Rectangle Width="60" Height="2" Canvas.Left="-5" Canvas.Top ="-5"  Fill="{StaticResource PlayerShipInvincibleColor}"/>
         <Rectangle Width="2" Height="43" Canvas.Left="-5" Canvas.Top="-5" Fill="{StaticResource PlayerShipInvincibleColor}"/>
         <Rectangle Width="2" Height="43" Canvas.Left="53" Canvas.Top="-5" Fill="{StaticResource PlayerShipInvincibleColor}"/>
         <Rectangle Width="60" Height="2" Canvas.Top="37" Canvas.Left="-5" Fill="{StaticResource PlayerShipInvincibleColor}"/>
+        <local:PlayerShipSprite/>
     </Canvas>
 </local:BaseSprite>

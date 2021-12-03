@@ -266,7 +266,7 @@ namespace SpaceInvaders.Model
 
         private void registerHit(BaseSprite currentSprite, int bulletNumber)
         {
-            this.playerShip.ToggleInvincible();
+            
             sound.playerBulletHit();
             this.background.Children.Remove(currentSprite);
 
