@@ -151,12 +151,14 @@ namespace SpaceInvaders.Model
             this.PowerUp = false;
             this.playerShip.ToggleInvincible();
             this.EnemyManager.BonusActive = false;
+            this.playerShip.MoveRight();
         }
 
         private void createAndPlacePlayerShip()
         {
             this.playerShip = new PlayerShip();
             this.background.Children.Add(this.playerShip.Sprite);
+            this.background.Children.Add(this.playerShip.Sprite2);
 
             this.placePlayerShipNearBottomOfBackgroundCentered();
         }
@@ -286,10 +288,9 @@ namespace SpaceInvaders.Model
         {
             if (this.EnemyManager.EnemyBullet.CheckForCollision(this.playerShip))
             {
-                if (!this.PowerUp)
-                {
+                
                     this.registerHitFromEnemy();
-                }
+                
                 
             }
         }
@@ -297,11 +298,17 @@ namespace SpaceInvaders.Model
         private void registerHitFromEnemy()
         {
             
-            this.background.Children.Remove(this.playerLives[this.playerLives.Count - 1].Sprite);
-            this.playerLives.RemoveAt(this.playerLives.Count - 1);
+            
             this.EnemyManager.EnemyBullet.Y = this.backgroundHeight;
             this.background.Children.Remove(this.EnemyManager.EnemyBullet.Sprite);
             this.sound.enemyBulletHit();
+            if (!this.PowerUp)
+            {
+                this.background.Children.Remove(this.playerLives[this.playerLives.Count - 1].Sprite);
+                this.playerLives.RemoveAt(this.playerLives.Count - 1);
+            }
+          
+            
 
             if (this.playerLives.Count == 0)
             {

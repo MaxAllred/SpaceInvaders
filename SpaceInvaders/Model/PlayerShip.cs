@@ -28,13 +28,25 @@ namespace SpaceInvaders.Model
         {
             this.Sprite1 = new PlayerShipSprite();
             this.Sprite2 = new PlayerShipInvincibleSprite();
+            this.Sprite2.Visibility = Visibility.Collapsed;
             
             Sprite = this.Sprite1;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
         public void ToggleInvincible()
         {
-            return;
+            if (Sprite.Equals(this.Sprite1))
+            {
+                Sprite = this.Sprite2;
+                this.Sprite1.Visibility = Visibility.Collapsed;
+                this.Sprite2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Sprite = this.Sprite1;
+                this.Sprite2.Visibility = Visibility.Collapsed;
+                this.Sprite1.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion

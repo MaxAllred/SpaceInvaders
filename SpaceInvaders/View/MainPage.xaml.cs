@@ -27,6 +27,8 @@ namespace SpaceInvaders.View
         /// </summary>
         public const double ApplicationWidth = 960;
 
+        private const int durationOfPowerup = 40;
+
         private int fireRate;
         private int powerUpDuration;
         private readonly GameManager gameManager;
@@ -154,7 +156,7 @@ namespace SpaceInvaders.View
             {
                 this.powerUpDuration++;
                 
-                if (this.powerUpDuration >= 50)
+                if (this.powerUpDuration >= durationOfPowerup)
                 {
                     this.gameManager.EndPowerUp();
                     this.powerUpDuration = 0;
