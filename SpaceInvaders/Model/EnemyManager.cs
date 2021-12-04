@@ -4,6 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace SpaceInvaders.Model
 {
+    /// <summary>
+    ///     Manages an Enemy Manager for the enemies.
+    /// </summary>
     public class EnemyManager
     {
         #region Data members
@@ -14,7 +17,13 @@ namespace SpaceInvaders.Model
         private const int MinSteps = -5;
         private const int MaxSteps = 28;
 
+        /// <summary>
+        ///     Keeps track of the collection of all enemy ships.
+        /// </summary>
         public readonly Collection<EnemyShip> AllEnemies;
+        /// <summary>
+        ///     Creates a bonus ship.
+        /// </summary>
         public BonusEnemyShip bonusShip;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
