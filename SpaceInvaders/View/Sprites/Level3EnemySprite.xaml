@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="HarderEnemyColor" Color="Tan"/>
-        <SolidColorBrush x:Key="PointColor" Color="Purple"/>
+        
         <SolidColorBrush x:Key="WarningColor" Color="Red"/>
     </UserControl.Resources>
 

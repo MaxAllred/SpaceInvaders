@@ -10,7 +10,7 @@
     Width="50">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="HarderEnemyColor" Color="Blue"/>
+        
         <SolidColorBrush x:Key="HarderPointColor" Color="Green"/>
     </UserControl.Resources>
 

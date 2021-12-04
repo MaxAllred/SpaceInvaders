@@ -14,10 +14,10 @@ namespace SpaceInvaders.Model
 
         private const int SpeedXDirection = 0;
         private const int SpeedYDirection = 0;
-        private const int maxShieldHealth = 3;
+        private const int MaxShieldHealth = 3;
         private int health;
 
-        public bool isDestroyed
+        public bool IsDestroyed
         {
             get
             {
@@ -47,7 +47,7 @@ namespace SpaceInvaders.Model
             this.HitTwice = new ShieldHitTwice();
             this.HitOnce.Visibility = Visibility.Collapsed;
             this.HitTwice.Visibility = Visibility.Collapsed;
-            this.health = maxShieldHealth;
+            this.health = MaxShieldHealth;
             Sprite = this.Intact;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
@@ -75,7 +75,7 @@ namespace SpaceInvaders.Model
             {
                 Sprite.Visibility = Visibility.Collapsed;
             }
-            this.X = this.X;
+            X = X;
             this.health--;
         }
 

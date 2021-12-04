@@ -75,17 +75,17 @@ namespace SpaceInvaders.Model
         /// <summary>Moves all elements.</summary>
         public void MoveAllElements()
         {
-            if (this.level == 1)
+            switch (this.level)
             {
-                this.level1Movement();
-            }
-            else if (this.level == 2)
-            {
-                this.level2Movement();
-            }
-            else
-            {
-                this.level3Movement();
+                case 1:
+                    this.level1Movement();
+                    break;
+                case 2:
+                    this.level2Movement();
+                    break;
+                default:
+                    this.level3Movement();
+                    break;
             }
 
             if (this.background.Children.Contains(this.BonusShip.Sprite))
@@ -443,37 +443,32 @@ namespace SpaceInvaders.Model
             }
         }
 
-        /// <summary>
-        ///     Generates the new level.
-        ///     Precondition: level > 0
-        ///     Postcondition: When the player passes the first level, the game moves on to the next level.
-        /// </summary>
-        /// <param name="level">The level.</param>
-        public void GenerateNewLevel(int level)
+        public void GenerateNewLevel(int currentLevel)
         {
-            this.level = level;
-            if (level == 2)
+            this.level = currentLevel;
+            switch (currentLevel)
             {
-                this.level1ShipCount = 4;
-                this.level2ShipCount = 6;
-                this.level3ShipCount = 8;
-                this.level4ShipCount = 10;
-                this.MoveRight = true;
-                this.countSteps = MaxSteps / 2;
-                this.createAllEnemyShips();
-                this.positionEnemies();
-            }
-            else if (level == 3)
-            {
-                this.level1ShipCount = 10;
-                this.level2ShipCount = 8;
-                this.level3ShipCount = 6;
-                this.level4ShipCount = 4;
-                this.MoveRight = true;
-                this.stepCloser = true;
-                this.countSteps = MaxSteps / 2;
-                this.createAllEnemyShips();
-                this.positionEnemies();
+                case 2:
+                    this.level1ShipCount = 4;
+                    this.level2ShipCount = 6;
+                    this.level3ShipCount = 8;
+                    this.level4ShipCount = 10;
+                    this.MoveRight = true;
+                    this.countSteps = MaxSteps / 2;
+                    this.createAllEnemyShips();
+                    this.positionEnemies();
+                    break;
+                case 3:
+                    this.level1ShipCount = 10;
+                    this.level2ShipCount = 8;
+                    this.level3ShipCount = 6;
+                    this.level4ShipCount = 4;
+                    this.MoveRight = true;
+                    this.stepCloser = true;
+                    this.countSteps = MaxSteps / 2;
+                    this.createAllEnemyShips();
+                    this.positionEnemies();
+                    break;
             }
         }
 

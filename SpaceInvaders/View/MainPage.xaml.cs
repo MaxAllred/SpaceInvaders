@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System;
-using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using SpaceInvaders.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -41,7 +37,7 @@ namespace SpaceInvaders.View
         private bool[] leftright;
         DispatcherTimer enemyTimer;
         DispatcherTimer playerTimer = new DispatcherTimer();
-        private bool isPaused = false;
+        private bool isPaused;
         private bool displayMainMenu;
 
         #endregion
@@ -162,15 +158,15 @@ namespace SpaceInvaders.View
                 this.pauseGame();
                 this.highScoreButton.Visibility = Visibility.Visible;
                 this.gameManager.HandleGameOver();
-                if (this.gameManager.Score > Int32.Parse(HighScoreSettings.SortByScore()[9][0]))
+                if (this.gameManager.Score > int.Parse(HighScoreSettings.SortByScore()[9][0]))
                 {
-                    string name = await this.InputTextDialogAsync("High Score! Enter Your Name");
+                    var name = await this.InputTextDialogAsync("High Score! Enter Your Name");
                     if (string.IsNullOrEmpty(name))
                     {
                         return;
                     }
 
-                    await HighScoreSettings.SubmitScoreAsync(name, this.gameManager.Score, this.gameManager.level);
+                    HighScoreSettings.SubmitScore(name, this.gameManager.Score, this.gameManager.Level);
                 }
             }
             else
@@ -197,7 +193,7 @@ namespace SpaceInvaders.View
         {
             
             this.isPaused = true;
-            if (this.isPaused == true)
+            if (this.isPaused)
             {
                 this.enemyTimer.Stop();
                 this.playerTimer.Stop();
@@ -219,23 +215,20 @@ namespace SpaceInvaders.View
         }
         private void viewHighScores(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
+            Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
         }
         private async Task<string> InputTextDialogAsync(string title)
         {
-            TextBox inputTextBox = new TextBox();
-            inputTextBox.AcceptsReturn = false;
-            inputTextBox.Height = 32;
-            ContentDialog dialog = new ContentDialog();
-            dialog.Content = inputTextBox;
-            dialog.Title = title;
-            dialog.IsSecondaryButtonEnabled = true;
-            dialog.PrimaryButtonText = "Ok";
-            dialog.SecondaryButtonText = "Cancel";
-            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
-                return inputTextBox.Text;
-            else
-                return "";
+            var inputTextBox = new TextBox {AcceptsReturn = false, Height = 32};
+            var dialog = new ContentDialog
+            {
+                Content = inputTextBox,
+                Title = title,
+                IsSecondaryButtonEnabled = true,
+                PrimaryButtonText = "Ok",
+                SecondaryButtonText = "Cancel"
+            };
+            return await dialog.ShowAsync() == ContentDialogResult.Primary ? inputTextBox.Text : "";
         }
         private async Task showMainMenuDialog()
         {
@@ -247,15 +240,15 @@ namespace SpaceInvaders.View
             };
             var result = await dialog.ShowAsync();
 
-            if (result == ContentDialogResult.Primary)
+            switch (result)
             {
-                this.Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
-            }
-            if (result == ContentDialogResult.Secondary)
-            {
-                this.unpauseGame();
-                this.displayMainMenu = false;
-                return;
+                case ContentDialogResult.Primary:
+                    Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
+                    break;
+                case ContentDialogResult.Secondary:
+                    this.unpauseGame();
+                    this.displayMainMenu = false;
+                    break;
             }
         }
 
