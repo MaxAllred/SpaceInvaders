@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SpaceInvaders.Model
 {
-    class HighScoreSettings
+    public class HighScoreSettings
     {
         private static int leaderBoardSize;
 
         public static List<String[]> SortByScore()
         {
-            List<String> scores = HighScoreSettings.ReadFile();
+            List<String> scores = ReadFile();
             List<String[]> seperatedByScorePlayerLevel = new List<string[]>();
             foreach (var current in scores)
             {

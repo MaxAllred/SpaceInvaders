@@ -11,11 +11,11 @@ namespace SpaceInvaders.Model
     {
         public Level2Enemy()
         {
-            this.Sprite1 = new Level2EnemySprite();
-            this.Sprite2 = new Level2EnemySprite2();
-            this.PointValue = 10;
-            this.CanShoot = false;
-            Sprite = this.Sprite1;
+            Sprite1 = new Level2EnemySprite();
+            Sprite2 = new Level2EnemySprite2();
+            PointValue = 10;
+            CanShoot = false;
+            Sprite = Sprite1;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
     }

@@ -18,8 +18,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void playerShot()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/Flash-laser-03.wav", "playerShot");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/Flash-laser-03.wav", "playerShot");
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void enemyShot()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/Flash-laser-09.wav", "enemyShot");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/Flash-laser-09.wav", "enemyShot");
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void bonusEnemyShot()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/mixkit-game-whip-shot-1512.wav", "bonusEnemyShot");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/mixkit-game-whip-shot-1512.wav", "bonusEnemyShot");
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void playerBulletHit()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/Boink-single-high-01.wav", "playerShotHit");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/Boink-single-high-01.wav", "playerShotHit");
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void enemyBulletHit()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/Rubber-snap-01.wav", "enemyShotHit");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/Rubber-snap-01.wav", "enemyShotHit");
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void bonusEnemyAppears()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/Game-Bonus-Sound-Effect.wav", "bonusEnemyAppears");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/Game-Bonus-Sound-Effect.wav", "bonusEnemyAppears");
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void gameOver()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/gameover.wav", "gameOver");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/gameover.wav", "gameOver");
         }
 
         /// <summary>
@@ -81,14 +81,14 @@ namespace SpaceInvaders.Model
         /// </summary>
         public void youWin()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/mixkit-video-game-win-2016.wav", "youWin");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/mixkit-video-game-win-2016.wav", "youWin");
         }
 
         public void invincible()
         {
-            sp = new SoundPlayer();
-            sp.Play(@"Assets/Audio/invincible-sound.wav", "invincible");
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/invincible-sound.wav", "invincible");
         }
     }
 }

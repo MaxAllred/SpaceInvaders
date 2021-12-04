@@ -7,15 +7,15 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
-    class Level4Enemy : EnemyShip
+    public class Level4Enemy : EnemyShip
     {
         public Level4Enemy()
         {
-            this.Sprite1 = new Level4EnemySprite();
-            this.Sprite2 = new Level4EnemySprite2();
-            this.PointValue = 20;
-            this.CanShoot = true;
-            Sprite = this.Sprite1;
+            Sprite1 = new Level4EnemySprite();
+            Sprite2 = new Level4EnemySprite2();
+            PointValue = 20;
+            CanShoot = true;
+            Sprite = Sprite1;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
     }
