@@ -24,7 +24,7 @@ namespace SpaceInvaders.Model
         /// <summary>
         ///     Creates a bonus ship.
         /// </summary>
-        public BonusEnemyShip bonusShip;
+        public BonusEnemyShip BonusShip;
         public Bullet EnemyBullet;
         public bool MoveRight = true;
         public bool CeaseFire = false;
@@ -52,7 +52,7 @@ namespace SpaceInvaders.Model
             this.sound = new SoundManager();
             this.background = background;
             this.AllEnemies = new Collection<EnemyShip>();
-            this.bonusShip = new BonusEnemyShip();
+            this.BonusShip = new BonusEnemyShip();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
             this.countSteps = MaxSteps / 2;
@@ -80,14 +80,14 @@ namespace SpaceInvaders.Model
                 this.level3Movement();
             }
 
-            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            if (this.background.Children.Contains(this.BonusShip.Sprite))
             {
-                this.bonusShip.MoveRight();
+                this.BonusShip.MoveRight();
             }
 
-            if (this.bonusShip.X + this.bonusShip.SpeedX + this.bonusShip.Width > this.backgroundWidth)
+            if (this.BonusShip.X + this.BonusShip.SpeedX + this.BonusShip.Width > this.backgroundWidth)
             {
-                this.background.Children.Remove(this.bonusShip.Sprite);
+                this.background.Children.Remove(this.BonusShip.Sprite);
             }
 
             if (this.background.Children.Contains(this.EnemyBullet.Sprite))
@@ -246,7 +246,7 @@ namespace SpaceInvaders.Model
 
         private void randomBonusEnemy()
         {
-            if (this.background.Children.Contains(this.bonusShip.Sprite) || this.BonusActive)
+            if (this.background.Children.Contains(this.BonusShip.Sprite) || this.BonusActive)
             {
                 return;
             }
@@ -255,9 +255,9 @@ namespace SpaceInvaders.Model
             if (rand.Next(100) == 1)
             {
                 var startingY = 25;
-                this.background.Children.Add(this.bonusShip.Sprite);
-                this.bonusShip.X = 0;
-                this.bonusShip.Y = startingY;
+                this.background.Children.Add(this.BonusShip.Sprite);
+                this.BonusShip.X = 0;
+                this.BonusShip.Y = startingY;
                 this.sound.bonusEnemyAppears();
             }
         }
@@ -342,9 +342,9 @@ namespace SpaceInvaders.Model
 
         public void ChooseEnemyAndShoot()
         {
-            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            if (this.background.Children.Contains(this.BonusShip.Sprite))
             {
-                this.Shoot(this.bonusShip);
+                this.Shoot(this.BonusShip);
             }
             else
             {
