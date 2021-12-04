@@ -213,7 +213,6 @@
     <Content Include="Assets\Audio\mixkit-game-whip-shot-1512.wav" />
     <Content Include="Assets\Audio\mixkit-video-game-win-2016.wav" />
     <Content Include="Assets\Audio\Rubber-snap-01.wav" />
-    <Content Include="highscore.txt" />
     <Content Include="Notes.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
