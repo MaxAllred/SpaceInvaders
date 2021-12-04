@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SpaceInvaders.Model;
 
@@ -20,17 +8,24 @@ using SpaceInvaders.Model;
 namespace SpaceInvaders.View.HighScoreBoard
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class HighScoreBoardPage : Page
     {
+        #region Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="HighScoreBoardPage"/> class.
+        ///     Initializes a new instance of the <see cref="HighScoreBoardPage" /> class.
         /// </summary>
         public HighScoreBoardPage()
         {
             this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Methods
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.SortByScore();
@@ -38,42 +33,34 @@ namespace SpaceInvaders.View.HighScoreBoard
 
         private void SortByScore()
         {
-
-            List<String[]> list = HighScoreSettings.SortByScore();
-            for (int i = 0; i < 10; i++)
+            var list = HighScoreSettings.SortByScore();
+            for (var i = 0; i < 10; i++)
             {
-
-
                 this.FirstListView.Items.Add(list[i][0]);
                 this.SecondListView.Items.Add(list[i][1]);
                 this.ThirdListView.Items.Add(list[i][2]);
-
             }
         }
+
         private void SortByLevel()
         {
-            List<String[]> list = HighScoreSettings.SortByLevel();
-            for (int i = 0; i < 10; i++)
+            var list = HighScoreSettings.SortByLevel();
+            for (var i = 0; i < 10; i++)
             {
-                
-                    
-                    this.FirstListView.Items.Add(list[i][2]);
-                    this.SecondListView.Items.Add(list[i][0]);
-                    this.ThirdListView.Items.Add(list[i][1]);
-                
+                this.FirstListView.Items.Add(list[i][2]);
+                this.SecondListView.Items.Add(list[i][0]);
+                this.ThirdListView.Items.Add(list[i][1]);
             }
         }
+
         private void SortByPlayer()
         {
-            List<String[]> list = HighScoreSettings.SortByPlayer();
-            for (int i = 0; i < 10; i++)
+            var list = HighScoreSettings.SortByPlayer();
+            for (var i = 0; i < 10; i++)
             {
-
-
                 this.FirstListView.Items.Add(list[i][1]);
                 this.SecondListView.Items.Add(list[i][0]);
                 this.ThirdListView.Items.Add(list[i][2]);
-
             }
         }
 
@@ -82,11 +69,13 @@ namespace SpaceInvaders.View.HighScoreBoard
             this.clearViews();
             this.SortByScore();
         }
+
         private void SortByLevelButtonClick(object sender, RoutedEventArgs e)
         {
             this.clearViews();
             this.SortByLevel();
         }
+
         private void SortByPlayerButtonClick(object sender, RoutedEventArgs e)
         {
             this.clearViews();
@@ -102,7 +91,9 @@ namespace SpaceInvaders.View.HighScoreBoard
 
         private void HomeButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            Frame.Navigate(typeof(MainPage));
         }
+
+        #endregion
     }
 }
