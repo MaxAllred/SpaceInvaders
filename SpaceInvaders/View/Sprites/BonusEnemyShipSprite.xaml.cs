@@ -4,7 +4,7 @@
 namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    ///     Manages a Bonus enemy ship.
+    ///     Draws a Bonus enemy ship.
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     public sealed partial class BonusEnemyShipSprite

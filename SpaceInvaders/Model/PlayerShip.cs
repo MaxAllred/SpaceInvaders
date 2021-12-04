@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
@@ -15,7 +14,14 @@ namespace SpaceInvaders.Model
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 0;
 
+        /// <summary>
+        ///     Create first sprite.
+        /// </summary>
         public BaseSprite Sprite1 { get; protected set; }
+
+        /// <summary>
+        ///     Create second sprite.
+        /// </summary>
         public BaseSprite Sprite2 { get; protected set; }
         #endregion
 
@@ -33,6 +39,10 @@ namespace SpaceInvaders.Model
             Sprite = this.Sprite1;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
+
+        /// <summary>
+        ///     Toggles the invincible.
+        /// </summary>
         public void ToggleInvincible()
         {
             if (Sprite.Equals(this.Sprite1))
