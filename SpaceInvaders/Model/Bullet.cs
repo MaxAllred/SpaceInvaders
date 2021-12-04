@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.Design;
+using System.Numerics;
 using Windows.Foundation;
 using SpaceInvaders.View.Sprites;
 
@@ -12,8 +14,17 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        private const int SpeedXDirection = 0;
+        private const int SpeedXDirection = 5;
         private const int SpeedYDirection = 20;
+
+        enum TargetedShipDirection
+        {
+            left, 
+            right, 
+            down
+        }
+
+        private TargetedShipDirection directionToShoot;
 
         #endregion
 
@@ -26,6 +37,11 @@ namespace SpaceInvaders.Model
         {
             Sprite = new BulletSprite();
             SetSpeed(SpeedXDirection, SpeedYDirection);
+        }
+
+        public Bullet(GameObject shipToTarget)
+        {
+            Sprite = new BulletSprite();
         }
 
         #endregion
@@ -57,6 +73,44 @@ namespace SpaceInvaders.Model
             }
 
             return true;
+        }
+
+        public void TargetShip(GameObject targetShip, GameObject originShip)
+        {
+            double targetX = targetShip.X + (targetShip.Width / 2);
+            double targetY = targetShip.Y;
+
+            double originY = originShip.Y + originShip.Height + this.Height;
+            double originX = originShip.X + (originShip.Width / 2) + (this.Width / 2);
+
+            Point targetPoint = new Point(targetX, targetY);
+            Point originPoint = new Point(originX, originY);
+
+            if (originPoint.X >= targetShip.X && originPoint.X <= (targetShip.X + targetShip.Width))
+            {
+                directionToShoot = TargetedShipDirection.down;
+            }
+            else if (originPoint.X < targetShip.X)
+            {
+                directionToShoot = TargetedShipDirection.right;
+            }
+            else
+            {
+                directionToShoot = TargetedShipDirection.left;
+            }
+        }
+
+        public void MoveTargeted()
+        {
+            this.MoveDown();
+            if (this.directionToShoot == TargetedShipDirection.left)
+            {
+                MoveLeft();
+            } else if (this.directionToShoot == TargetedShipDirection.right)
+            {
+                this.MoveRight();
+            }
+
         }
 
         #endregion

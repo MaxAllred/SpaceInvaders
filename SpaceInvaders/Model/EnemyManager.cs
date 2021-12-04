@@ -45,6 +45,8 @@ namespace SpaceInvaders.Model
 
         private int countSteps;
 
+        private GameObject playerShip;
+
         #endregion
 
         #region Constructors
@@ -98,7 +100,7 @@ namespace SpaceInvaders.Model
 
             if (this.background.Children.Contains(this.EnemyBullet.Sprite))
             {
-                this.EnemyBullet.MoveDown();
+                this.EnemyBullet.MoveTargeted();
 
                 if (this.EnemyBullet.Y > this.backgroundHeight)
                 {
@@ -226,6 +228,16 @@ namespace SpaceInvaders.Model
             {
                 this.MoveRight = !this.MoveRight;
             }
+        }
+
+        public void setPlayerLocation(GameObject thePlayerShip)
+        {
+            if (thePlayerShip == null)
+            {
+                return;
+            }
+            
+            this.playerShip = thePlayerShip;
         }
 
         /// <summary>
@@ -359,14 +371,14 @@ namespace SpaceInvaders.Model
         {
             if (this.background.Children.Contains(this.BonusShip.Sprite))
             {
-                this.Shoot(this.BonusShip);
+                this.targetedShot(this.BonusShip);
             }
             else
             {
                 var enemy = this.chooseRandomEnemy();
                 if (enemy != null)
                 {
-                    this.Shoot(enemy);
+                    this.targetedShot(enemy);
                 }
             }
         }
@@ -411,6 +423,23 @@ namespace SpaceInvaders.Model
                 this.background.Children.Add(this.EnemyBullet.Sprite);
                 this.EnemyBullet.Y = enemy.Y + enemy.Height + this.EnemyBullet.Height;
                 this.EnemyBullet.X = enemy.X + .5 * enemy.Width - .5 * this.EnemyBullet.Width;
+            }
+        }
+
+        public void targetedShot(EnemyShip enemy)
+        {
+            if (this.CeaseFire)
+            {
+                return;
+            }
+
+            if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
+            {
+                this.sound.enemyShot();
+                this.background.Children.Add(this.EnemyBullet.Sprite);
+                this.EnemyBullet.Y = enemy.Y + enemy.Height + this.EnemyBullet.Height;
+                this.EnemyBullet.X = enemy.X + .5 * enemy.Width - .5 * this.EnemyBullet.Width;
+                this.EnemyBullet.TargetShip(this.playerShip, enemy);
             }
         }
 

@@ -105,6 +105,7 @@ namespace SpaceInvaders.Model
             this.shields = new Collection<Shield>();
             this.createAndPlaceShields();
             this.EnemyManager = new EnemyManager(this.background);
+            this.EnemyManager.setPlayerLocation(this.playerShip); //todo
             this.EnemyManager.CreateAndPlaceAllEnemyShips();
             this.playerBullets = new Collection<Bullet>();
             this.createPlayerBullets();
