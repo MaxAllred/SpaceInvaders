@@ -140,6 +140,7 @@
     <Compile Include="Model\Level4Enemy.cs" />
     <Compile Include="Model\Level4EnemyFactory.cs" />
     <Compile Include="Model\PlayerShip.cs" />
+    <Compile Include="Model\Shield.cs" />
     <Compile Include="Model\SoundManager.cs" />
     <Compile Include="Model\SoundPlayer.cs" />
     <Compile Include="View\HighScoreBoard\HighScoreBoardPage.xaml.cs">
@@ -197,6 +198,15 @@
     </Compile>
     <Compile Include="View\Sprites\PlayerShipSprite.xaml.cs">
       <DependentUpon>PlayerShipSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\ShieldHitOnce.xaml.cs">
+      <DependentUpon>ShieldHitOnce.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\ShieldHitTwice.xaml.cs">
+      <DependentUpon>ShieldHitTwice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\ShieldIntact.xaml.cs">
+      <DependentUpon>ShieldIntact.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +308,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\PlayerShipSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\ShieldHitOnce.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\ShieldHitTwice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\ShieldIntact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
