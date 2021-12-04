@@ -28,10 +28,10 @@ namespace SpaceInvaders.View.HighScoreBoard
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.SortByScore();
+            this.sortByScore();
         }
 
-        private void SortByScore()
+        private void sortByScore()
         {
             var list = HighScoreSettings.SortByScore();
             for (var i = 0; i < 10; i++)
@@ -42,7 +42,7 @@ namespace SpaceInvaders.View.HighScoreBoard
             }
         }
 
-        private void SortByLevel()
+        private void sortByLevel()
         {
             var list = HighScoreSettings.SortByLevel();
             for (var i = 0; i < 10; i++)
@@ -53,7 +53,7 @@ namespace SpaceInvaders.View.HighScoreBoard
             }
         }
 
-        private void SortByPlayer()
+        private void sortByPlayer()
         {
             var list = HighScoreSettings.SortByPlayer();
             for (var i = 0; i < 10; i++)
@@ -64,22 +64,22 @@ namespace SpaceInvaders.View.HighScoreBoard
             }
         }
 
-        private void SortByScoreButtonClick(object sender, RoutedEventArgs e)
+        private void sortByScoreButtonClick(object sender, RoutedEventArgs e)
         {
             this.clearViews();
-            this.SortByScore();
+            this.sortByScore();
         }
 
-        private void SortByLevelButtonClick(object sender, RoutedEventArgs e)
+        private void sortByLevelButtonClick(object sender, RoutedEventArgs e)
         {
             this.clearViews();
-            this.SortByLevel();
+            this.sortByLevel();
         }
 
-        private void SortByPlayerButtonClick(object sender, RoutedEventArgs e)
+        private void sortByPlayerButtonClick(object sender, RoutedEventArgs e)
         {
             this.clearViews();
-            this.SortByPlayer();
+            this.sortByPlayer();
         }
 
         private void clearViews()
@@ -89,7 +89,7 @@ namespace SpaceInvaders.View.HighScoreBoard
             this.ThirdListView.Items.Clear();
         }
 
-        private void HomeButtonClick(object sender, RoutedEventArgs e)
+        private void homeButtonClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
         }
