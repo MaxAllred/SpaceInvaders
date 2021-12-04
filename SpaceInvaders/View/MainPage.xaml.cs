@@ -67,7 +67,7 @@ namespace SpaceInvaders.View
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
             Window.Current.CoreWindow.KeyUp += this.coreWindowOnKeyUp;
-            
+            HighScoreSettings.SetUpSaveFile();
 
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
@@ -146,6 +146,7 @@ namespace SpaceInvaders.View
 
             if (this.gameManager.GameOver)
             {
+                
                 this.pauseGame();
                 this.HighScoreButton.Visibility = Visibility.Visible;
                 this.gameManager.HandleGameOver();
@@ -157,7 +158,7 @@ namespace SpaceInvaders.View
                         return;
                     }
 
-                    HighScoreSettings.SubmitScoreAsync(name, this.gameManager.Score, this.gameManager.level);
+                    await HighScoreSettings.SubmitScoreAsync(name, this.gameManager.Score, this.gameManager.level);
                 }
             }
             else
@@ -182,6 +183,7 @@ namespace SpaceInvaders.View
 
         private void pauseGame()
         {
+            
             this.isPaused = true;
             if (this.isPaused == true)
             {
@@ -192,6 +194,10 @@ namespace SpaceInvaders.View
 
         private void unpauseGame()
         {
+            if (this.gameManager.GameOver)
+            {
+                return;
+            }
             if (this.isPaused)
             {
                 this.enemyTimer.Start();

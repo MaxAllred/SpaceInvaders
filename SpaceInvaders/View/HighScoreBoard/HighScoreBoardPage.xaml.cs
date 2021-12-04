@@ -38,29 +38,42 @@ namespace SpaceInvaders.View.HighScoreBoard
 
         private void SortByScore()
         {
-            foreach (var current in HighScoreSettings.SortByScore())
+
+            List<String[]> list = HighScoreSettings.SortByScore();
+            for (int i = 0; i < 10; i++)
             {
-                this.FirstListView.Items.Add(current[0]);
-                this.SecondListView.Items.Add(current[1]);
-                this.ThirdListView.Items.Add(current[2]);
+
+
+                this.FirstListView.Items.Add(list[i][0]);
+                this.SecondListView.Items.Add(list[i][1]);
+                this.ThirdListView.Items.Add(list[i][2]);
+
             }
         }
         private void SortByLevel()
         {
-            foreach (var current in HighScoreSettings.SortByLevel())
+            List<String[]> list = HighScoreSettings.SortByLevel();
+            for (int i = 0; i < 10; i++)
             {
-                this.FirstListView.Items.Add(current[2]);
-                this.SecondListView.Items.Add(current[0]);
-                this.ThirdListView.Items.Add(current[1]);
+                
+                    
+                    this.FirstListView.Items.Add(list[i][2]);
+                    this.SecondListView.Items.Add(list[i][0]);
+                    this.ThirdListView.Items.Add(list[i][1]);
+                
             }
         }
         private void SortByPlayer()
         {
-            foreach (var current in HighScoreSettings.SortByPlayer())
+            List<String[]> list = HighScoreSettings.SortByPlayer();
+            for (int i = 0; i < 10; i++)
             {
-                this.FirstListView.Items.Add(current[1]);
-                this.SecondListView.Items.Add(current[0]);
-                this.ThirdListView.Items.Add(current[2]);
+
+
+                this.FirstListView.Items.Add(list[i][1]);
+                this.SecondListView.Items.Add(list[i][0]);
+                this.ThirdListView.Items.Add(list[i][2]);
+
             }
         }
 
