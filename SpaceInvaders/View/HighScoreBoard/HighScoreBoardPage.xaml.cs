@@ -26,6 +26,10 @@ namespace SpaceInvaders.View.HighScoreBoard
 
         #region Methods
 
+        /// <summary>
+        ///     Invoked when the Page is loaded and becomes the current source of a parent Frame.
+        /// </summary>
+        /// <param name="e">Event data that can be examined by overriding code. The event data is representative of the pending navigation that will load the current Page. Usually the most relevant property to examine is Parameter.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.sortByScore();

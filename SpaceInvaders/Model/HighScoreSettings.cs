@@ -2,34 +2,30 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace SpaceInvaders.Model
 {
-    class HighScoreSettings
+    public class HighScoreSettings
     {
         private static int leaderBoardSize;
 
         public static List<String[]> SortByScore()
         {
-            List<String> scores = HighScoreSettings.ReadFile();
-            List<String[]> seperatedByScorePlayerLevel = new List<string[]>();
+            List<String> scores = ReadFile();
+            List<String[]> separatedByScorePlayerLevel = new List<string[]>();
             foreach (var current in scores)
             {
-                seperatedByScorePlayerLevel.Add(current.Split(","));
+                separatedByScorePlayerLevel.Add(current.Split(","));
             }
-            seperatedByScorePlayerLevel.Sort((x, y) => Int32.Parse(y[0]).CompareTo(Int32.Parse(x[0])));
+            separatedByScorePlayerLevel.Sort((x, y) => Int32.Parse(y[0]).CompareTo(Int32.Parse(x[0])));
             List<String[]> finalList = new List<string[]>();
             leaderBoardSize = 10;
             for(int i = 0; i < leaderBoardSize; i++)
             {
-                finalList.Add(seperatedByScorePlayerLevel[i]);
+                finalList.Add(separatedByScorePlayerLevel[i]);
             }
-            return seperatedByScorePlayerLevel;
+            return separatedByScorePlayerLevel;
 
         }
         public static List<String[]> SortByPlayer()

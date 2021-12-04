@@ -56,15 +56,15 @@ namespace SpaceInvaders.View
             
             this.InitializeComponent();
             this.displayMainMenu = true;
-            enemyTimer = new DispatcherTimer();
-            enemyTimer.Tick += this.timeTick;
-            enemyTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
-            enemyTimer.Start();
-            
-            playerTimer.Tick += this.timeTickPlayerAsync;
-            playerTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            playerTimer.Start();
-            leftright = new bool[3];
+            this.enemyTimer = new DispatcherTimer();
+            this.enemyTimer.Tick += this.timeTick;
+            this.enemyTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            this.enemyTimer.Start();
+
+            this.playerTimer.Tick += this.timeTickPlayerAsync;
+            this.playerTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            this.playerTimer.Start();
+            this.leftright = new bool[3];
             this.powerUpDuration = 0;
             ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;

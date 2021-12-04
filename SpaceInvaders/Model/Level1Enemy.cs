@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
-    class Level1Enemy : EnemyShip
+    /// <summary>
+    ///     Manages a level 1 enemy ship.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.EnemyShip" />
+    public class Level1Enemy : EnemyShip
     {
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Level1Enemy"/> class.
+        /// </summary>
         public Level1Enemy()
         {
-            this.Sprite1 = new Level1EnemySprite();
-            this.Sprite2 = new Level1EnemySprite2();
-            this.PointValue = 5;
-            this.CanShoot = false;
-            Sprite = this.Sprite1;
+            Sprite1 = new Level1EnemySprite();
+            Sprite2 = new Level1EnemySprite2();
+            PointValue = 5;
+            CanShoot = false;
+            Sprite = Sprite1;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
     }

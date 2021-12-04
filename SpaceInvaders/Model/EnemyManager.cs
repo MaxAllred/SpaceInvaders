@@ -21,10 +21,12 @@ namespace SpaceInvaders.Model
         ///     Keeps track of the collection of all enemy ships.
         /// </summary>
         public readonly Collection<EnemyShip> AllEnemies;
+
         /// <summary>
         ///     Creates a bonus ship.
         /// </summary>
-        public BonusEnemyShip bonusShip;
+        public BonusEnemyShip BonusShip;
+
         public Bullet EnemyBullet;
         public bool MoveRight = true;
         public bool CeaseFire = false;
@@ -47,12 +49,16 @@ namespace SpaceInvaders.Model
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="EnemyManager" /> class.
+        /// </summary>
+        /// <param name="background">The background.</param>
         public EnemyManager(Canvas background)
         {
             this.sound = new SoundManager();
             this.background = background;
             this.AllEnemies = new Collection<EnemyShip>();
-            this.bonusShip = new BonusEnemyShip();
+            this.BonusShip = new BonusEnemyShip();
             this.backgroundHeight = this.background.Height;
             this.backgroundWidth = this.background.Width;
             this.countSteps = MaxSteps / 2;
@@ -80,14 +86,14 @@ namespace SpaceInvaders.Model
                 this.level3Movement();
             }
 
-            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            if (this.background.Children.Contains(this.BonusShip.Sprite))
             {
-                this.bonusShip.MoveRight();
+                this.BonusShip.MoveRight();
             }
 
-            if (this.bonusShip.X + this.bonusShip.SpeedX + this.bonusShip.Width > this.backgroundWidth)
+            if (this.BonusShip.X + this.BonusShip.SpeedX + this.BonusShip.Width > this.backgroundWidth)
             {
-                this.background.Children.Remove(this.bonusShip.Sprite);
+                this.background.Children.Remove(this.BonusShip.Sprite);
             }
 
             if (this.background.Children.Contains(this.EnemyBullet.Sprite))
@@ -222,12 +228,18 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Creates the and place all enemy ships.
+        /// </summary>
         public void CreateAndPlaceAllEnemyShips()
         {
             this.createAllEnemyShips();
             this.positionEnemies();
         }
 
+        /// <summary>
+        ///     Called when [tick].
+        /// </summary>
         public void OnTick()
         {
             this.randomShot();
@@ -246,7 +258,7 @@ namespace SpaceInvaders.Model
 
         private void randomBonusEnemy()
         {
-            if (this.background.Children.Contains(this.bonusShip.Sprite) || this.BonusActive)
+            if (this.background.Children.Contains(this.BonusShip.Sprite) || this.BonusActive)
             {
                 return;
             }
@@ -255,9 +267,9 @@ namespace SpaceInvaders.Model
             if (rand.Next(100) == 1)
             {
                 var startingY = 25;
-                this.background.Children.Add(this.bonusShip.Sprite);
-                this.bonusShip.X = 0;
-                this.bonusShip.Y = startingY;
+                this.background.Children.Add(this.BonusShip.Sprite);
+                this.BonusShip.X = 0;
+                this.BonusShip.Y = startingY;
                 this.sound.bonusEnemyAppears();
             }
         }
@@ -340,11 +352,14 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Chooses the enemy and shoot.
+        /// </summary>
         public void ChooseEnemyAndShoot()
         {
-            if (this.background.Children.Contains(this.bonusShip.Sprite))
+            if (this.background.Children.Contains(this.BonusShip.Sprite))
             {
-                this.Shoot(this.bonusShip);
+                this.Shoot(this.BonusShip);
             }
             else
             {
@@ -377,6 +392,12 @@ namespace SpaceInvaders.Model
             return null;
         }
 
+        /// <summary>
+        ///     Shoots the specified enemy.
+        ///     Precondition: enemy != null
+        ///     Postcondition: Choose an enemy and let the enemy fire bullets.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
         public void Shoot(EnemyShip enemy)
         {
             if (this.CeaseFire)
@@ -393,6 +414,12 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Generates the new level.
+        ///     Precondition: level > 0
+        ///     Postcondition: When the player passes the first level, the game moves on to the next level.
+        /// </summary>
+        /// <param name="level">The level.</param>
         public void GenerateNewLevel(int level)
         {
             this.level = level;

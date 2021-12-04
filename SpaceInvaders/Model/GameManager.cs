@@ -273,12 +273,12 @@ namespace SpaceInvaders.Model
                     }
                 }
 
-                if (this.background.Children.Contains(this.EnemyManager.bonusShip.Sprite))
+                if (this.background.Children.Contains(this.EnemyManager.BonusShip.Sprite))
                 {
-                    if (bullet.CheckForCollision(this.EnemyManager.bonusShip))
+                    if (bullet.CheckForCollision(this.EnemyManager.BonusShip))
                     {
-                        this.Score += this.EnemyManager.bonusShip.PointValue;
-                        this.registerHit(this.EnemyManager.bonusShip.Sprite, bullet);
+                        this.Score += this.EnemyManager.BonusShip.PointValue;
+                        this.registerHit(this.EnemyManager.BonusShip.Sprite, bullet);
                         this.PowerUp = true;
                         this.sound.invincible();
                         this.playerShip.ToggleInvincible();
