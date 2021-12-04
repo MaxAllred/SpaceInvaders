@@ -248,7 +248,7 @@ namespace SpaceInvaders.Model
             {
                 return;
             }
-
+            
             var rand = new Random();
             if (rand.Next(100) == 1)
             {
@@ -256,6 +256,7 @@ namespace SpaceInvaders.Model
                 this.background.Children.Add(this.bonusShip.Sprite);
                 this.bonusShip.X = 0;
                 this.bonusShip.Y = startingY;
+                sound.bonusEnemyAppears();
             }
         }
 
