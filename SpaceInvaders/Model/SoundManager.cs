@@ -5,7 +5,13 @@
     /// </summary>
     public class SoundManager
     {
+        #region Data members
+
         private SoundPlayer sp;
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         ///     Plays the player shot sound.
@@ -17,7 +23,7 @@
         }
 
         /// <summary>
-        ///  Plays the enemy shot sound.
+        ///     Plays the enemy shot sound.
         /// </summary>
         public void enemyShot()
         {
@@ -44,7 +50,7 @@
         }
 
         /// <summary>
-        /// Plays the enemy bullet hit sound.
+        ///     Plays the enemy bullet hit sound.
         /// </summary>
         public void enemyBulletHit()
         {
@@ -71,7 +77,7 @@
         }
 
         /// <summary>
-        ///  Plays the you win sound.
+        ///     Plays the you win sound.
         /// </summary>
         public void youWin()
         {
@@ -87,5 +93,7 @@
             this.sp = new SoundPlayer();
             this.sp.Play(@"Assets/Audio/invincible-sound.wav", "invincible");
         }
+
+        #endregion
     }
 }

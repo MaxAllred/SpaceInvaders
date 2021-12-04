@@ -9,8 +9,11 @@ namespace SpaceInvaders.Model
     /// </summary>
     public class SoundPlayer
     {
+        #region Methods
+
         [DllImport("winmm.dll")]
-        static extern Int32 mciSendString(string command, StringBuilder buffer, int bufferSize, IntPtr hwndCallback);
+        private static extern int mciSendString(string command, StringBuilder buffer, int bufferSize,
+            IntPtr hwndCallback);
 
         /// <summary>
         ///     Plays the specified path.
@@ -21,14 +24,13 @@ namespace SpaceInvaders.Model
         /// <param name="name">The name.</param>
         public void Play(string path, string name)
         {
-
             mciSendString($@"close {name}", null, 0, IntPtr.Zero);
             // Open
             mciSendString($@"open {path} type waveaudio alias {name}", null, 0, IntPtr.Zero);
             // Play
             mciSendString($@"play {name}", null, 0, IntPtr.Zero);
-
-            
         }
+
+        #endregion
     }
 }
