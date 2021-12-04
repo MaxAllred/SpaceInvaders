@@ -99,5 +99,10 @@ namespace SpaceInvaders.View.HighScoreBoard
             this.SecondListView.Items.Clear();
             this.ThirdListView.Items.Clear();
         }
+
+        private void HomeButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
     }
 }

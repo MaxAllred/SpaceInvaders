@@ -42,6 +42,7 @@ namespace SpaceInvaders.View
         DispatcherTimer enemyTimer;
         DispatcherTimer playerTimer = new DispatcherTimer();
         private bool isPaused = false;
+        private bool displayMainMenu;
 
         #endregion
 
@@ -54,12 +55,13 @@ namespace SpaceInvaders.View
         {
             
             this.InitializeComponent();
+            this.displayMainMenu = true;
             enemyTimer = new DispatcherTimer();
             enemyTimer.Tick += this.timeTick;
             enemyTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             enemyTimer.Start();
             
-            playerTimer.Tick += this.timeTickPlayer;
+            playerTimer.Tick += this.timeTickPlayerAsync;
             playerTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             playerTimer.Start();
             leftright = new bool[3];
@@ -74,6 +76,8 @@ namespace SpaceInvaders.View
 
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
+
+
         }
 
         #endregion
@@ -119,8 +123,13 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void timeTickPlayer(object sender, object e)
+        private async void timeTickPlayerAsync(object sender, object e)
         {
+            if (this.displayMainMenu)
+            {
+                this.pauseGame();
+                await this.showMainMenuDialog();
+            }
             if (this.leftright[0])
             {
                 this.gameManager.MovePlayerShipLeft();
@@ -205,6 +214,7 @@ namespace SpaceInvaders.View
             {
                 this.enemyTimer.Start();
                 this.playerTimer.Start();
+                this.isPaused = false;
             }
         }
         private void ViewHighScores(object sender, RoutedEventArgs e)
@@ -227,9 +237,30 @@ namespace SpaceInvaders.View
             else
                 return "";
         }
+        private async Task showMainMenuDialog()
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = "Welcome to Space Invaders!",
+                PrimaryButtonText = "View Score Board",
+                SecondaryButtonText = "Play Game"
+            };
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                this.Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
+            }
+            if (result == ContentDialogResult.Secondary)
+            {
+                this.unpauseGame();
+                this.displayMainMenu = false;
+                return;
+            }
+        }
 
         #endregion
 
-        
+
     }
 }

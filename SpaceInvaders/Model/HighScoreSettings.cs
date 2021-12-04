@@ -98,15 +98,15 @@ namespace SpaceInvaders.Model
             
 
             await SubmitScoreAsync("Player", 100, 1);
-            await SubmitScoreAsync("Gamer", 10, 1);
-            await SubmitScoreAsync("Gamer", 400, 2);
+            await SubmitScoreAsync("Bob", 10, 1);
+            await SubmitScoreAsync("Steve", 400, 2);
             await SubmitScoreAsync("Wizard", 1100, 3);
-            await SubmitScoreAsync("Player", 100, 1);
-            await SubmitScoreAsync("Gamer", 10, 1);
+            await SubmitScoreAsync("Arnold", 100, 1);
+            await SubmitScoreAsync("Dancer", 10, 1);
             await SubmitScoreAsync("Gamer", 400, 2);
-            await SubmitScoreAsync("Kathleen Anderson", 1500, 3);
-            await SubmitScoreAsync("Max Allred", 1500, 3);
-            await SubmitScoreAsync("Janera Smith", 1500, 3);
+            await SubmitScoreAsync("Kathleen Anderson", 500, 3);
+            await SubmitScoreAsync("Max Allred", 500, 3);
+            await SubmitScoreAsync("Janera Smith", 500, 3);
 
         }
     }
