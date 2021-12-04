@@ -26,7 +26,7 @@ namespace SpaceInvaders.Model
         public int Score;
         public bool GameOver;
         public bool PowerUp;
-        public int level;
+        public int Level;
         public EnemyManager EnemyManager;
         private int activeBullets;
         private readonly double backgroundHeight;
@@ -74,8 +74,6 @@ namespace SpaceInvaders.Model
 
         #region Methods
 
-        public event EventHandler ScoreChanged;
-
         /// <summary>Moves enemy ships and all active bullets</summary>
         public void MoveElements()
         {
@@ -96,7 +94,7 @@ namespace SpaceInvaders.Model
         /// <param name="theBackground">The background canvas.</param>
         public void InitializeGame(Canvas theBackground)
         {
-            this.level = 1;
+            this.Level = 1;
             this.sound = new SoundManager();
             this.background = theBackground ?? throw new ArgumentNullException(nameof(theBackground));
             this.createAndPlacePlayerShip();
@@ -259,9 +257,8 @@ namespace SpaceInvaders.Model
 
         private void checkForPlayerBulletCollision()
         {
-            for (var bulletIndex = 0; bulletIndex < this.playerBullets.Count; bulletIndex++)
+            foreach (var bullet in this.playerBullets)
             {
-                var bullet = this.playerBullets[bulletIndex];
                 for (var enemyShipIndex = 0; enemyShipIndex < this.EnemyManager.AllEnemies.Count; enemyShipIndex++)
                 {
                     var currentEnemy = this.EnemyManager.AllEnemies[enemyShipIndex];
@@ -299,7 +296,7 @@ namespace SpaceInvaders.Model
                 }
             }
 
-            if (checkShieldHit(this.EnemyManager.EnemyBullet))
+            if (this.checkShieldHit(this.EnemyManager.EnemyBullet))
             {
                 this.EnemyManager.EnemyBullet.Y = this.backgroundHeight;
                 this.background.Children.Remove(this.EnemyManager.EnemyBullet.Sprite);
@@ -319,7 +316,7 @@ namespace SpaceInvaders.Model
                     returnBool = true;
                 }
 
-                if (shield.isDestroyed && this.background.Children.Contains(shield.Sprite))
+                if (shield.IsDestroyed && this.background.Children.Contains(shield.Sprite))
                 {
                     this.background.Children.Remove(shield.Sprite);
                 }
@@ -376,7 +373,7 @@ namespace SpaceInvaders.Model
 
         private void checkAllEliminated()
         {
-            if (this.EnemyManager.AllEnemies.Count == 0 && this.level >= 3)
+            if (this.EnemyManager.AllEnemies.Count == 0 && this.Level >= 3)
             {
                 this.sound.youWin();
                 this.allEliminated = true;
@@ -389,8 +386,8 @@ namespace SpaceInvaders.Model
                     currentBullet.Y = 0 - currentBullet.Height;
                 }
 
-                this.level++;
-                this.EnemyManager.GenerateNewLevel(this.level);
+                this.Level++;
+                this.EnemyManager.GenerateNewLevel(this.Level);
             }
         }
 

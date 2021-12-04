@@ -158,15 +158,15 @@ namespace SpaceInvaders.View
                 this.pauseGame();
                 this.highScoreButton.Visibility = Visibility.Visible;
                 this.gameManager.HandleGameOver();
-                if (this.gameManager.Score > Int32.Parse(HighScoreSettings.SortByScore()[9][0]))
+                if (this.gameManager.Score > int.Parse(HighScoreSettings.SortByScore()[9][0]))
                 {
-                    string name = await this.InputTextDialogAsync("High Score! Enter Your Name");
+                    var name = await this.InputTextDialogAsync("High Score! Enter Your Name");
                     if (string.IsNullOrEmpty(name))
                     {
                         return;
                     }
 
-                    HighScoreSettings.SubmitScore(name, this.gameManager.Score, this.gameManager.level);
+                    HighScoreSettings.SubmitScore(name, this.gameManager.Score, this.gameManager.Level);
                 }
             }
             else
@@ -219,8 +219,8 @@ namespace SpaceInvaders.View
         }
         private async Task<string> InputTextDialogAsync(string title)
         {
-            TextBox inputTextBox = new TextBox {AcceptsReturn = false, Height = 32};
-            ContentDialog dialog = new ContentDialog
+            var inputTextBox = new TextBox {AcceptsReturn = false, Height = 32};
+            var dialog = new ContentDialog
             {
                 Content = inputTextBox,
                 Title = title,

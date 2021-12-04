@@ -17,9 +17,9 @@ namespace SpaceInvaders.Model
             {
                 separatedByScorePlayerLevel.Add(current.Split(","));
             }
-            seperatedByScorePlayerLevel.Sort((x, y) => Int32.Parse(y[0]).CompareTo(Int32.Parse(x[0])));
+            separatedByScorePlayerLevel.Sort((x, y) => Int32.Parse(y[0]).CompareTo(Int32.Parse(x[0])));
             
-            return seperatedByScorePlayerLevel;
+            return separatedByScorePlayerLevel;
 
         }
         public static List<string[]> SortByPlayer()
@@ -53,7 +53,7 @@ namespace SpaceInvaders.Model
 
         }
 
-        internal static async void SetUpSaveFile()
+        internal static void SetUpSaveFile()
         {
             Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\TeamF");
             Debug.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));

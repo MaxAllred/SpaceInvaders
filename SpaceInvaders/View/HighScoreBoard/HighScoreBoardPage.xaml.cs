@@ -10,7 +10,7 @@ namespace SpaceInvaders.View.HighScoreBoard
     /// <summary>
     ///     An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HighScoreBoardPage : Page
+    public sealed partial class HighScoreBoardPage
     {
         #region Constructors
 
@@ -40,9 +40,9 @@ namespace SpaceInvaders.View.HighScoreBoard
             var list = HighScoreSettings.SortByScore();
             for (var i = 0; i < 10; i++)
             {
-                this.firstListView.Items.Add(list[i][0]);
-                this.secondListView.Items.Add(list[i][1]);
-                this.thirdListView.Items.Add(list[i][2]);
+                this.firstListView.Items?.Add(list[i][0]);
+                this.secondListView.Items?.Add(list[i][1]);
+                this.thirdListView.Items?.Add(list[i][2]);
             }
         }
 
@@ -51,9 +51,9 @@ namespace SpaceInvaders.View.HighScoreBoard
             var list = HighScoreSettings.SortByLevel();
             for (var i = 0; i < 10; i++)
             {
-                this.firstListView.Items.Add(list[i][2]);
-                this.secondListView.Items.Add(list[i][0]);
-                this.thirdListView.Items.Add(list[i][1]);
+                this.firstListView.Items?.Add(list[i][2]);
+                this.secondListView.Items?.Add(list[i][0]);
+                this.thirdListView.Items?.Add(list[i][1]);
             }
         }
 
@@ -62,9 +62,9 @@ namespace SpaceInvaders.View.HighScoreBoard
             var list = HighScoreSettings.SortByPlayer();
             for (var i = 0; i < 10; i++)
             {
-                this.firstListView.Items.Add(list[i][1]);
-                this.secondListView.Items.Add(list[i][0]);
-                this.thirdListView.Items.Add(list[i][2]);
+                this.firstListView.Items?.Add(list[i][1]);
+                this.secondListView.Items?.Add(list[i][0]);
+                this.thirdListView.Items?.Add(list[i][2]);
             }
         }
 
@@ -88,9 +88,9 @@ namespace SpaceInvaders.View.HighScoreBoard
 
         private void clearViews()
         {
-            this.firstListView.Items.Clear();
-            this.secondListView.Items.Clear();
-            this.thirdListView.Items.Clear();
+            this.firstListView.Items?.Clear();
+            this.secondListView.Items?.Clear();
+            this.thirdListView.Items?.Clear();
         }
 
         private void homeButtonClick(object sender, RoutedEventArgs e)
