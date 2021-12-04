@@ -123,6 +123,7 @@
     <Compile Include="Model\EnemyFactory.cs" />
     <Compile Include="Model\EnemyManager.cs" />
     <Compile Include="Model\EnemyShip.cs" />
+    <Compile Include="Model\HighScoreSettings.cs" />
     <Compile Include="Model\Level1Enemy.cs" />
     <Compile Include="Model\EnemyShipVersion.cs" />
     <Compile Include="Model\GameOverText.cs" />
@@ -140,6 +141,9 @@
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="Model\SoundManager.cs" />
     <Compile Include="Model\SoundPlayer.cs" />
+    <Compile Include="View\High Score Board\HighScoreBoardPage.xaml.cs">
+      <DependentUpon>HighScoreBoardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -224,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\High Score Board\HighScoreBoardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
