@@ -5,6 +5,7 @@ using System.IO;
 
 namespace SpaceInvaders.Model
 {
+    /// <summary>This class defines the settings for the High Score</summary>
     public class HighScoreSettings
     {
       

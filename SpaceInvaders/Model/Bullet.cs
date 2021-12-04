@@ -39,11 +39,6 @@ namespace SpaceInvaders.Model
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
-        public Bullet(GameObject shipToTarget)
-        {
-            Sprite = new BulletSprite();
-        }
-
         #endregion
 
         #region Methods
@@ -75,6 +70,9 @@ namespace SpaceInvaders.Model
             return true;
         }
 
+        /// <summary>Makes the bullet target a specific ship</summary>
+        /// <param name="targetShip">The target ship.</param>
+        /// <param name="originShip">The ship the bullet was fired from.</param>
         public void TargetShip(GameObject targetShip, GameObject originShip)
         {
             double targetX = targetShip.X + (targetShip.Width / 2);
@@ -88,18 +86,19 @@ namespace SpaceInvaders.Model
 
             if (originPoint.X >= targetShip.X && originPoint.X <= (targetShip.X + targetShip.Width))
             {
-                directionToShoot = TargetedShipDirection.down;
+                this.directionToShoot = TargetedShipDirection.down;
             }
             else if (originPoint.X < targetShip.X)
             {
-                directionToShoot = TargetedShipDirection.right;
+                this.directionToShoot = TargetedShipDirection.right;
             }
             else
             {
-                directionToShoot = TargetedShipDirection.left;
+                this.directionToShoot = TargetedShipDirection.left;
             }
         }
 
+        /// <summary>Moves the bullet in a direction determined by the position of the targeted ship</summary>
         public void MoveTargeted()
         {
             this.MoveDown();

@@ -27,9 +27,12 @@ namespace SpaceInvaders.Model
         /// </summary>
         public BonusEnemyShip BonusShip;
 
+        /// <summary>The enemy bullet</summary>
         public Bullet EnemyBullet;
-        public bool MoveRight = true;
+        private bool moveRight = true;
+        /// <summary>Determines if the enemies can fire</summary>
         public bool CeaseFire = false;
+        /// <summary>Determines if the player ship can be hit</summary>
         public bool BonusActive = false;
 
         private readonly double backgroundHeight;
@@ -111,7 +114,7 @@ namespace SpaceInvaders.Model
 
         private void level1Movement()
         {
-            if (this.MoveRight)
+            if (this.moveRight)
             {
                 foreach (var currentEnemy in this.AllEnemies)
                 {
@@ -134,13 +137,13 @@ namespace SpaceInvaders.Model
 
             if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
             {
-                this.MoveRight = !this.MoveRight;
+                this.moveRight = !this.moveRight;
             }
         }
 
         private void level2Movement()
         {
-            if (this.MoveRight)
+            if (this.moveRight)
             {
                 foreach (var currentEnemy in this.AllEnemies)
                 {
@@ -181,13 +184,13 @@ namespace SpaceInvaders.Model
 
             if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
             {
-                this.MoveRight = !this.MoveRight;
+                this.moveRight = !this.moveRight;
             }
         }
 
         private void level3Movement()
         {
-            if (this.MoveRight)
+            if (this.moveRight)
             {
                 foreach (var currentEnemy in this.AllEnemies)
                 {
@@ -226,10 +229,12 @@ namespace SpaceInvaders.Model
 
             if (this.countSteps == MaxSteps || this.countSteps == MinSteps)
             {
-                this.MoveRight = !this.MoveRight;
+                this.moveRight = !this.moveRight;
             }
         }
 
+        /// <summary>Sets the location of the player ship</summary>
+        /// <param name="thePlayerShip">The player ship.</param>
         public void setPlayerLocation(GameObject thePlayerShip)
         {
             if (thePlayerShip == null)
@@ -405,30 +410,14 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        ///     Shoots the specified enemy.
+        ///     Fires a targeted shot from the specified enemy.
         ///     Precondition: enemy != null
         ///     Postcondition: Choose an enemy and let the enemy fire bullets.
         /// </summary>
         /// <param name="enemy">The enemy.</param>
-        public void Shoot(EnemyShip enemy)
-        {
-            if (this.CeaseFire)
-            {
-                return;
-            }
-
-            if (!this.background.Children.Contains(this.EnemyBullet.Sprite))
-            {
-                this.sound.enemyShot();
-                this.background.Children.Add(this.EnemyBullet.Sprite);
-                this.EnemyBullet.Y = enemy.Y + enemy.Height + this.EnemyBullet.Height;
-                this.EnemyBullet.X = enemy.X + .5 * enemy.Width - .5 * this.EnemyBullet.Width;
-            }
-        }
-
         public void targetedShot(EnemyShip enemy)
         {
-            if (this.CeaseFire)
+            if (this.CeaseFire || enemy == null) 
             {
                 return;
             }
@@ -443,6 +432,8 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>Generates the new level based on the input number</summary>
+        /// <param name="currentLevel">The level number to create</param>
         public void GenerateNewLevel(int currentLevel)
         {
             this.level = currentLevel;
@@ -453,7 +444,7 @@ namespace SpaceInvaders.Model
                     this.level2ShipCount = 6;
                     this.level3ShipCount = 8;
                     this.level4ShipCount = 10;
-                    this.MoveRight = true;
+                    this.moveRight = true;
                     this.countSteps = MaxSteps / 2;
                     this.createAllEnemyShips();
                     this.positionEnemies();
@@ -463,7 +454,7 @@ namespace SpaceInvaders.Model
                     this.level2ShipCount = 8;
                     this.level3ShipCount = 6;
                     this.level4ShipCount = 4;
-                    this.MoveRight = true;
+                    this.moveRight = true;
                     this.stepCloser = true;
                     this.countSteps = MaxSteps / 2;
                     this.createAllEnemyShips();
