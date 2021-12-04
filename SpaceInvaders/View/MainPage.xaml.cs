@@ -33,7 +33,7 @@ namespace SpaceInvaders.View
         /// </summary>
         public const double ApplicationWidth = 960;
 
-        private const int durationOfPowerup = 40;
+        private const int DurationOfPowerup = 40;
 
         private int fireRate;
         private int powerUpDuration;
@@ -160,7 +160,7 @@ namespace SpaceInvaders.View
             {
                 
                 this.pauseGame();
-                this.HighScoreButton.Visibility = Visibility.Visible;
+                this.highScoreButton.Visibility = Visibility.Visible;
                 this.gameManager.HandleGameOver();
                 if (this.gameManager.Score > Int32.Parse(HighScoreSettings.SortByScore()[9][0]))
                 {
@@ -184,7 +184,7 @@ namespace SpaceInvaders.View
             {
                 this.powerUpDuration++;
                 
-                if (this.powerUpDuration >= durationOfPowerup)
+                if (this.powerUpDuration >= DurationOfPowerup)
                 {
                     this.gameManager.EndPowerUp();
                     this.powerUpDuration = 0;
@@ -217,7 +217,7 @@ namespace SpaceInvaders.View
                 this.isPaused = false;
             }
         }
-        private void ViewHighScores(object sender, RoutedEventArgs e)
+        private void viewHighScores(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
         }

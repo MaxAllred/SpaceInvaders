@@ -9,6 +9,6 @@
 
     <Canvas x:Name="theCanvas" Width="960" Height="480" Background ="Black">
 
-        <Button Background="Gray"  Foreground="White" BorderBrush="Gray" x:Name="HighScoreButton" Content="View High Scores" Canvas.Left="406" Canvas.Top="240" Click="ViewHighScores" Visibility="Collapsed" AllowFocusOnInteraction="False" RequestedTheme="Dark" />
+        <Button Background="Gray"  Foreground="White" BorderBrush="Gray" x:Name="highScoreButton" Content="View High Scores" Canvas.Left="406" Canvas.Top="240" Click="viewHighScores" Visibility="Collapsed" AllowFocusOnInteraction="False" RequestedTheme="Dark" />
     </Canvas>
 </Page>
