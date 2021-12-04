@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.IO;
-using Windows.Devices.Printers;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -27,7 +24,6 @@ namespace SpaceInvaders.Model
         public int Score;
         public bool GameOver;
         public bool PowerUp;
-        public event EventHandler ScoreChanged;
         public int level;
         public EnemyManager EnemyManager;
         private int activeBullets;
@@ -74,6 +70,8 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
+
+        public event EventHandler ScoreChanged;
 
         /// <summary>Moves enemy ships and all active bullets</summary>
         public void MoveElements()
@@ -180,7 +178,6 @@ namespace SpaceInvaders.Model
             {
                 this.playerShip.MoveLeft();
             }
-            
         }
 
         /// <summary>
@@ -197,14 +194,13 @@ namespace SpaceInvaders.Model
         {
             if (this.activeBullets < bulletCount)
             {
-                
                 this.background.Children.Add(this.playerBullets[this.activeBullets].Sprite);
                 this.playerBullets[this.activeBullets].X = this.playerShip.X + this.playerShip.Width / 2 -
                                                            this.playerBullets[this.activeBullets].Width / 2;
                 this.playerBullets[this.activeBullets].Y = this.playerShip.Y - this.playerShip.Height;
                 this.activeBullets++;
-                
-                sound.playerShot();
+
+                this.sound.playerShot();
 
                 return;
             }
@@ -216,7 +212,7 @@ namespace SpaceInvaders.Model
                     this.playerBullets[i].X =
                         this.playerShip.X + this.playerShip.Width / 2 - this.playerBullets[i].Width / 2;
                     this.playerBullets[i].Y = this.playerShip.Y - this.playerShip.Height;
-                    sound.playerShot();
+                    this.sound.playerShot();
                     return;
                 }
             }
@@ -234,10 +230,10 @@ namespace SpaceInvaders.Model
         {
             for (var bulletIndex = 0; bulletIndex < this.playerBullets.Count; bulletIndex++)
             {
-                Bullet bullet = this.playerBullets[bulletIndex];
+                var bullet = this.playerBullets[bulletIndex];
                 for (var enemyShipIndex = 0; enemyShipIndex < this.EnemyManager.AllEnemies.Count; enemyShipIndex++)
                 {
-                    EnemyShip currentEnemy = this.EnemyManager.AllEnemies[enemyShipIndex];
+                    var currentEnemy = this.EnemyManager.AllEnemies[enemyShipIndex];
                     if (bullet.CheckForCollision(currentEnemy))
                     {
                         this.Score += currentEnemy.PointValue;
@@ -245,9 +241,11 @@ namespace SpaceInvaders.Model
                         this.registerHit(currentEnemy.Sprite, bulletIndex);
                     }
                 }
+
                 if (this.background.Children.Contains(this.EnemyManager.bonusShip.Sprite))
                 {
-                    if (bullet.CheckForCollision(this.EnemyManager.bonusShip)) {
+                    if (bullet.CheckForCollision(this.EnemyManager.bonusShip))
+                    {
                         this.Score += this.EnemyManager.bonusShip.PointValue;
                         this.registerHit(this.EnemyManager.bonusShip.Sprite, bulletIndex);
                         this.PowerUp = true;
@@ -255,32 +253,30 @@ namespace SpaceInvaders.Model
                         this.playerShip.ToggleInvincible();
                         this.EnemyManager.BonusActive = true;
                     }
-                    
                 }
             }
         }
 
         protected virtual void OnScoreChanged(EventArgs e)
         {
-            EventHandler handler = ScoreChanged;
+            var handler = this.ScoreChanged;
             handler?.Invoke(this, e);
         }
 
         private void registerHit(BaseSprite currentSprite, int bulletNumber)
         {
-            
-            sound.playerBulletHit();
+            this.sound.playerBulletHit();
             this.background.Children.Remove(currentSprite);
 
-            this.playerBullets[bulletNumber].Y = 0  - this.playerBullets[bulletNumber].Height;
+            this.playerBullets[bulletNumber].Y = 0 - this.playerBullets[bulletNumber].Height;
 
             this.background.Children.Remove(this.scoreTextBlock);
             this.scoreTextBlock = new TextBlock
             {
                 Text = "Score: " + this.Score,
                 HorizontalTextAlignment = TextAlignment.Center,
-               Foreground = new SolidColorBrush(Windows.UI.Colors.White)
-        };
+                Foreground = new SolidColorBrush(Colors.White)
+            };
             this.background.Children.Add(this.scoreTextBlock);
         }
 
@@ -288,17 +284,12 @@ namespace SpaceInvaders.Model
         {
             if (this.EnemyManager.EnemyBullet.CheckForCollision(this.playerShip))
             {
-                
-                    this.registerHitFromEnemy();
-                
-                
+                this.registerHitFromEnemy();
             }
         }
 
         private void registerHitFromEnemy()
         {
-            
-            
             this.EnemyManager.EnemyBullet.Y = this.backgroundHeight;
             this.background.Children.Remove(this.EnemyManager.EnemyBullet.Sprite);
             this.sound.enemyBulletHit();
@@ -307,12 +298,10 @@ namespace SpaceInvaders.Model
                 this.background.Children.Remove(this.playerLives[this.playerLives.Count - 1].Sprite);
                 this.playerLives.RemoveAt(this.playerLives.Count - 1);
             }
-          
-            
 
             if (this.playerLives.Count == 0)
             {
-                sound.gameOver();
+                this.sound.gameOver();
                 this.background.Children.Remove(this.playerShip.Sprite);
                 this.background.Children.Remove(this.EnemyManager.EnemyBullet.Sprite);
                 this.GameOver = true;
@@ -322,19 +311,19 @@ namespace SpaceInvaders.Model
 
         private void checkAllEliminated()
         {
-            
             if (this.EnemyManager.AllEnemies.Count == 0 && this.level >= 3)
             {
-                sound.youWin();
+                this.sound.youWin();
                 this.allEliminated = true;
                 this.GameOver = true;
             }
             else if (this.EnemyManager.AllEnemies.Count == 0)
             {
-                foreach (var currentBullet in playerBullets)
+                foreach (var currentBullet in this.playerBullets)
                 {
                     currentBullet.Y = 0 - currentBullet.Height;
                 }
+
                 this.level++;
                 this.EnemyManager.GenerateNewLevel(this.level);
             }
@@ -342,19 +331,16 @@ namespace SpaceInvaders.Model
 
         public void HandleGameOver()
         {
-            
             var gameOverText = new GameOverText(0);
-           
+
             if (this.allEliminated)
             {
                 gameOverText = new GameOverText(1);
-                
             }
 
-           
             this.background.Children.Add(gameOverText.Sprite);
             gameOverText.X = this.backgroundWidth / 2 - gameOverText.Width / 2;
-            
+
             gameOverText.Y = TextBottomOffset;
         }
 

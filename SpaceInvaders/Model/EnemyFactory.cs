@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceInvaders.Model
+﻿namespace SpaceInvaders.Model
 {
     public abstract class EnemyFactory
     {
+        #region Methods
+
         public abstract EnemyShip GetEnemyShip();
+
+        #endregion
     }
 }
