@@ -32,6 +32,15 @@
         }
 
         /// <summary>
+        ///     Plays the bonus enemy shot.
+        /// </summary>
+        public void bonusEnemyShot()
+        {
+            this.sp = new SoundPlayer();
+            this.sp.Play(@"Assets/Audio/mixkit-game-whip-shot-1512.wav", "bonusEnemyShot");
+        }
+
+        /// <summary>
         ///     Plays the player bullet hit sound.
         /// </summary>
         public void playerBulletHit()
