@@ -28,15 +28,22 @@ namespace SpaceInvaders.Model
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>Checks for collision between this bullet and a ship.</summary>
         /// <param name="ship">The ship.</param>
         /// <returns>
-        ///   True if the bullet intersects the ship, false otherwise
+        ///     True if the bullet intersects the ship, false otherwise
         /// </returns>
         /// <exception cref="ArgumentNullException">ship</exception>
         public bool CheckForCollision(GameObject ship)
         {
-            if (ship == null) throw new ArgumentNullException(nameof(ship));
+            if (ship == null)
+            {
+                throw new ArgumentNullException(nameof(ship));
+            }
 
             var bulletBoundary = new Rect(X, Y, Width, Height);
             var shipBoundary = new Rect(ship.X, ship.Y, ship.Width, ship.Height);
@@ -44,7 +51,11 @@ namespace SpaceInvaders.Model
             var intersect = bulletBoundary;
             intersect.Intersect(shipBoundary);
 
-            if (intersect.IsEmpty) return false;
+            if (intersect.IsEmpty)
+            {
+                return false;
+            }
+
             return true;
         }
 
