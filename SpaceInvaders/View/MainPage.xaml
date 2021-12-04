@@ -8,6 +8,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Canvas x:Name="theCanvas" Width="960" Height="480" Background ="Black">
-        <Button x:Name="HighScoreButton" Content="View High Scores" Canvas.Left="406" Canvas.Top="240" Click="ViewHighScores" Visibility="Collapsed"/>
+        <Button Background="Gray" FocusVisualPrimaryBrush="White" Foreground="White" BorderBrush="Gray" x:Name="HighScoreButton" Content="View High Scores" Canvas.Left="406" Canvas.Top="240" Click="ViewHighScores" Visibility="Collapsed"/>
     </Canvas>
 </Page>

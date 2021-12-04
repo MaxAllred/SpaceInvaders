@@ -8,13 +8,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Canvas x:Name="theCanvas" Width="960" Height="480" Background ="Black">
-        <TextBlock Text="High Score Board" FontSize="60"></TextBlock>
-        <Button x:Name="SortByLevelButton" Content="Sort By Level" Canvas.Left="758" Canvas.Top="24"  Visibility="Visible" Click="SortByLevelButtonClick"/>
-        <Button x:Name="SortByPlayerButton" Content="Sort By Player" Canvas.Left="621" Canvas.Top="24"  Visibility="Visible" Click="SortByPlayerButtonClick"/>
-        <Button x:Name="SortByScoreButton" Content="Sort By Score" Canvas.Left="493" Canvas.Top="24"  Visibility="Visible" Click="SortByScoreButtonClick"/>
-        <ListView Background="Black" BorderBrush="Gray" BorderThickness="2" Margin="709,155,0,0" x:Name="FirstListView" Width="283" Height="410" RequestedTheme="Default" SelectionMode="None" Canvas.Left="-622" Canvas.Top="-76"/>
-        <ListView Background="Black" BorderBrush="Gray" BorderThickness="2" Margin="709,155,0,0" x:Name="SecondListView" Width="283" Height="410" RequestedTheme="Default" SelectionMode="None" Canvas.Left="-328" Canvas.Top="-76"/>
-        <ListView Background="Black" BorderBrush="Gray" BorderThickness="2" Margin="689,155,0,0" x:Name="ThirdListView" Width="283" Height="410" RequestedTheme="Default" SelectionMode="None" Canvas.Left="-19" Canvas.Top="-76"/>
+        <TextBlock Text="High Score Board" Foreground="White" FontSize="60"></TextBlock>
+        <Button BorderBrush="Gray" Foreground="White" x:Name="SortByLevelButton" Content="Sort By Level" Canvas.Left="758" Canvas.Top="24"  Visibility="Visible" Click="SortByLevelButtonClick"/>
+        <Button BorderBrush="Gray" Foreground ="White"  x:Name="SortByPlayerButton" Content="Sort By Player" Canvas.Left="621" Canvas.Top="24"  Visibility="Visible" Click="SortByPlayerButtonClick"/>
+        <Button BorderBrush="Gray" Foreground ="White" x:Name="SortByScoreButton" Content="Sort By Score" Canvas.Left="493" Canvas.Top="24"  Visibility="Visible" Click="SortByScoreButtonClick"/>
+        <ListView Background="Black" Foreground ="White" BorderBrush="Gray" BorderThickness="2" Margin="709,155,0,0" x:Name="FirstListView" Width="283" Height="410" RequestedTheme="Default" SelectionMode="None" Canvas.Left="-622" Canvas.Top="-76"/>
+        <ListView Background="Black" Foreground ="White" BorderBrush="Gray" BorderThickness="2" Margin="709,155,0,0" x:Name="SecondListView" Width="283" Height="410" RequestedTheme="Default" SelectionMode="None" Canvas.Left="-328" Canvas.Top="-76"/>
+        <ListView Background="Black" Foreground ="White" BorderBrush="Gray" BorderThickness="2" Margin="689,155,0,0" x:Name="ThirdListView" Width="283" Height="410" RequestedTheme="Default" SelectionMode="None" Canvas.Left="-19" Canvas.Top="-76"/>
 
     </Canvas>
 </Page>
