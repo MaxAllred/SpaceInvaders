@@ -28,7 +28,7 @@ namespace SpaceInvaders.Model
         public bool GameOver;
         public bool PowerUp;
         public event EventHandler ScoreChanged;
-        private int level;
+        public int level;
         public EnemyManager EnemyManager;
         private int activeBullets;
         private readonly double backgroundHeight;
@@ -342,6 +342,7 @@ namespace SpaceInvaders.Model
 
         public void HandleGameOver()
         {
+            
             var gameOverText = new GameOverText(0);
            
             if (this.allEliminated)

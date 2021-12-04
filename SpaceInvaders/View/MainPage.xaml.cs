@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -135,7 +138,7 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void timeTick(object sender, object e)
+        private async void timeTick(object sender, object e)
         {
             this.fireRate++;
 
@@ -143,7 +146,19 @@ namespace SpaceInvaders.View
 
             if (this.gameManager.GameOver)
             {
+                this.pauseGame();
+                this.HighScoreButton.Visibility = Visibility.Visible;
                 this.gameManager.HandleGameOver();
+                if (this.gameManager.Score > Int32.Parse(HighScoreSettings.SortByScore()[9][0]))
+                {
+                    string name = await this.InputTextDialogAsync("High Score! Enter Your Name");
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        return;
+                    }
+
+                    HighScoreSettings.SubmitScoreAsync(name, this.gameManager.Score, this.gameManager.level);
+                }
             }
             else
             {
@@ -182,6 +197,26 @@ namespace SpaceInvaders.View
                 this.enemyTimer.Start();
                 this.playerTimer.Start();
             }
+        }
+        private void ViewHighScores(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HighScoreBoard.HighScoreBoardPage));
+        }
+        private async Task<string> InputTextDialogAsync(string title)
+        {
+            TextBox inputTextBox = new TextBox();
+            inputTextBox.AcceptsReturn = false;
+            inputTextBox.Height = 32;
+            ContentDialog dialog = new ContentDialog();
+            dialog.Content = inputTextBox;
+            dialog.Title = title;
+            dialog.IsSecondaryButtonEnabled = true;
+            dialog.PrimaryButtonText = "Ok";
+            dialog.SecondaryButtonText = "Cancel";
+            if (await dialog.ShowAsync() == ContentDialogResult.Primary)
+                return inputTextBox.Text;
+            else
+                return "";
         }
 
         #endregion

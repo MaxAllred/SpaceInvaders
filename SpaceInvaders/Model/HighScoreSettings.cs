@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Storage;
+
+namespace SpaceInvaders.Model
+{
+    class HighScoreSettings
+    {
+        private static int leaderBoardSize;
+
+        public static List<String[]> SortByScore()
+        {
+            List<String> scores = HighScoreSettings.ReadFile();
+            List<String[]> seperatedByScorePlayerLevel = new List<string[]>();
+            foreach (var current in scores)
+            {
+                seperatedByScorePlayerLevel.Add(current.Split(","));
+            }
+            seperatedByScorePlayerLevel.Sort((x, y) => Int32.Parse(y[0]).CompareTo(Int32.Parse(x[0])));
+            List<String[]> finalList = new List<string[]>();
+            leaderBoardSize = 10;
+            for(int i = 0; i < leaderBoardSize; i++)
+            {
+                finalList.Add(seperatedByScorePlayerLevel[i]);
+            }
+            return seperatedByScorePlayerLevel;
+
+        }
+        public static List<String[]> SortByPlayer()
+        {
+            List<String[]> unsortedList = SortByScore();
+            unsortedList.Sort((x,y)=>String.Compare(x[1],y[1]));
+            return unsortedList;
+        }
+        public static List<String[]> SortByLevel()
+        {
+            List<String[]> unsortedList = SortByScore();
+            unsortedList.Sort((x, y) => String.Compare(y[2], x[2]));
+            return unsortedList;
+        }
+        public static List<String> ReadFile()
+        {
+            List<String> linesInFile = new List<string>();
+            
+            string[] lines = System.IO.File.ReadAllLines(@"Assets/highscore.txt");
+            foreach (var current in lines)
+            {
+                linesInFile.Add(current);
+            }
+            return linesInFile;
+        }
+
+        internal static async Task SubmitScoreAsync(string name, int score, int level)
+        {
+            // try
+            // {
+            //     string output = score + "," + name + "," + level;
+            //     //create file in public folder
+            //     StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            //     StorageFile sampleFile = await storageFolder.CreateFileAsync("highscore.txt", CreationCollisionOption.ReplaceExisting);
+            //
+            //     //write sring to created file
+            //     await FileIO.AppendTextAsync(sampleFile, output);
+            //
+            //     //get asets folder
+            //     StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            //     StorageFolder assetsFolder = await appInstalledFolder.GetFolderAsync("Assets");
+            //
+            //     //move file from public folder to assets
+            //     await sampleFile.MoveAsync(assetsFolder, "highscore.txt", NameCollisionOption.ReplaceExisting);
+            //
+            // }
+            // catch (Exception ex)
+            // {
+            //     Debug.WriteLine("error: " + ex);
+            //
+            // }
+            
+        }
+    }
+}

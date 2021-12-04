@@ -141,7 +141,7 @@
     <Compile Include="Model\PlayerShip.cs" />
     <Compile Include="Model\SoundManager.cs" />
     <Compile Include="Model\SoundPlayer.cs" />
-    <Compile Include="View\High Score Board\HighScoreBoardPage.xaml.cs">
+    <Compile Include="View\HighScoreBoard\HighScoreBoardPage.xaml.cs">
       <DependentUpon>HighScoreBoardPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
@@ -213,6 +213,7 @@
     <Content Include="Assets\Audio\mixkit-game-whip-shot-1512.wav" />
     <Content Include="Assets\Audio\mixkit-video-game-win-2016.wav" />
     <Content Include="Assets\Audio\Rubber-snap-01.wav" />
+    <Content Include="Assets\highscore.txt" />
     <Content Include="Notes.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -228,7 +229,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\High Score Board\HighScoreBoardPage.xaml">
+    <Page Include="View\HighScoreBoard\HighScoreBoardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
