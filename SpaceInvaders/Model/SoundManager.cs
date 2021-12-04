@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpaceInvaders.Model
+﻿namespace SpaceInvaders.Model
 {
     /// <summary>
     ///     Manages a Sound manager for each sound to be played for playership, enemies, bullets, and collisions.
