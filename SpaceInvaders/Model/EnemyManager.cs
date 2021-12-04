@@ -21,10 +21,12 @@ namespace SpaceInvaders.Model
         ///     Keeps track of the collection of all enemy ships.
         /// </summary>
         public readonly Collection<EnemyShip> AllEnemies;
+
         /// <summary>
         ///     Creates a bonus ship.
         /// </summary>
         public BonusEnemyShip BonusShip;
+
         public Bullet EnemyBullet;
         public bool MoveRight = true;
         public bool CeaseFire = false;
@@ -47,6 +49,10 @@ namespace SpaceInvaders.Model
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="EnemyManager" /> class.
+        /// </summary>
+        /// <param name="background">The background.</param>
         public EnemyManager(Canvas background)
         {
             this.sound = new SoundManager();
@@ -222,12 +228,18 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Creates the and place all enemy ships.
+        /// </summary>
         public void CreateAndPlaceAllEnemyShips()
         {
             this.createAllEnemyShips();
             this.positionEnemies();
         }
 
+        /// <summary>
+        ///     Called when [tick].
+        /// </summary>
         public void OnTick()
         {
             this.randomShot();
@@ -340,6 +352,9 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Chooses the enemy and shoot.
+        /// </summary>
         public void ChooseEnemyAndShoot()
         {
             if (this.background.Children.Contains(this.BonusShip.Sprite))
@@ -377,6 +392,12 @@ namespace SpaceInvaders.Model
             return null;
         }
 
+        /// <summary>
+        ///     Shoots the specified enemy.
+        ///     Precondition: enemy != null
+        ///     Postcondition: Choose an enemy and let the enemy fire bullets.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
         public void Shoot(EnemyShip enemy)
         {
             if (this.CeaseFire)
@@ -393,6 +414,12 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Generates the new level.
+        ///     Precondition: level > 0
+        ///     Postcondition: When the player passes the first level, the game moves on to the next level.
+        /// </summary>
+        /// <param name="level">The level.</param>
         public void GenerateNewLevel(int level)
         {
             this.level = level;
